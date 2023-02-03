@@ -8,10 +8,31 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Node",
+"class": "Music",
+"language": "GDScript",
+"path": "res://scripts/music.gd"
+} ]
+_global_script_class_icons={
+"Music": ""
+}
+
 [application]
 
 config/name="Global Game Jam 2023"
 config/icon="res://icon.png"
+
+[autoload]
+
+Saving="*res://scripts/saving.gd"
+Screen="*res://scripts/screen.gd"
+Sfx="*res://scripts/sfx.gd"
+ProgressionStore="*res://scripts/progression_store.gd"
+Music="*res://scripts/music.gd"
+GlobalCamera="*res://scripts/global_camera.gd"
+GameTimer="*res://scripts/game_timer.gd"
+CheckpointStore="*res://scripts/checkpoint_store.gd"
 
 [gui]
 
