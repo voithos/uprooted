@@ -6,4 +6,5 @@
 params_diffuse_mode = 1
 albedo_texture = ExtResource( 1 )
 metallic_specular = 0.0
+uv1_scale = Vector3( 0.5, 1, 0.5 )
 uv1_triplanar = true

@@ -1,21 +1,35 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/blocks/Floor.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Environment.tres" type="Environment" id=3]
+[ext_resource path="res://scenes/blocks/Wall.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/blocks/Cube.tscn" type="PackedScene" id=5]
 
 [node name="Spatial" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.86261, 0 )
-
-[node name="Floor" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50031, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 3 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.642507, 0.76628, 0, -0.76628, -0.642507, 0, 11.3217, 0 )
+transform = Transform( 0.980025, -1.51988e-08, -0.198872, 0.152392, -0.642507, 0.750974, -0.127777, -0.76628, -0.629673, 0, 11.3217, 0 )
 shadow_enabled = true
 shadow_bias = 0.05
 directional_shadow_max_distance = 250.0
+
+[node name="Geometry" type="Spatial" parent="."]
+
+[node name="Floor" parent="Geometry" instance=ExtResource( 2 )]
+skeleton = NodePath("../..")
+
+[node name="Wall" parent="Geometry" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.9675 )
+
+[node name="Cube" parent="Geometry" instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 4.65524, 0, 0, 0, 1, -10.9765, 4.46924, -13.252 )
+
+[node name="Cube2" parent="Geometry" instance=ExtResource( 5 )]
+transform = Transform( 4.09838, 0, 0, 0, 1, 0, 0, 0, 4.09838, -12.0809, 1.20264, 11.0579 )
