@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ShakeableCamera.gd" type="Script" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=1]
+octaves = 4
+period = 20.0
+persistence = 0.8
+
+[node name="Camera" type="Camera"]
+current = true
+fov = 75.0
+script = ExtResource( 1 )
+noise = SubResource( 1 )

@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://scenes/Player.gd"
+}, {
+"base": "Camera",
+"class": "ShakeableCamera",
+"language": "GDScript",
+"path": "res://scenes/ShakeableCamera.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
 "Level": "",
-"Player": ""
+"Player": "",
+"ShakeableCamera": ""
 }
 
 [application]

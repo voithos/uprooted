@@ -1,8 +1,8 @@
 extends Node
 
-
 var level: Level
 var player: Player
+var camera: ShakeableCamera
 
 var is_level_ready: bool setget ,_get_is_level_ready
 

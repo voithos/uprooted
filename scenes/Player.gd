@@ -177,9 +177,8 @@ func _take_damage(damage):
         # Hit two things in a single frame; ignore.
         return
     set_health(health - damage)
-    print("TAKING DAMAGE", health)
     _begin_invulernability_after_damage()
-    # TODO: Add camera shake
+    Session.camera.add_trauma(0.8)
 
 func _begin_invulernability_after_damage():
     is_invulnerable = true
