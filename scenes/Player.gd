@@ -7,10 +7,12 @@ onready var GRAVITY: float = (ProjectSettings.get_setting("physics/3d/default_gr
 
 const MIN_DISTANCE_BELOW_SEA_LEVEL := 1.0
 
-const MAX_SPEED := 20.0
+const MAX_SPEED := 15.0
+const SPRINT_MULTIPLIER := 2.0 # Applied to MAX_SPEED to get sprint speed
 const JUMP_SPEED := 18.0
 const ACCEL := 4.5
 const DECEL := 16.0
+const SPRINT_ACCEL_MULTIPLIER := 1.5
 # How good movement in midair is.
 const AIR_CONTROL := 0.3
 const MAX_SLOPE_ANGLE := deg2rad(40.0)
@@ -120,13 +122,17 @@ func accelerate_horizontal(delta: float) -> void:
     var temp_vel := velocity
     temp_vel.y = 0
     
+    var is_sprinting := Input.is_action_pressed("sprint")
+    var sprint_multiplier = SPRINT_MULTIPLIER if is_sprinting else 1.0
+
     var temp_accel: float
-    var target: Vector3 = direction * MAX_SPEED
+    var target: Vector3 = direction * MAX_SPEED * sprint_multiplier
     
+    var accel_multiplier = SPRINT_ACCEL_MULTIPLIER if is_sprinting else 1.0
     if direction.dot(temp_vel) > 0:
-        temp_accel = ACCEL
+        temp_accel = ACCEL * accel_multiplier
     else:
-        temp_accel = DECEL
+        temp_accel = DECEL * accel_multiplier
     
     if is_airborne:
         temp_accel *= AIR_CONTROL
