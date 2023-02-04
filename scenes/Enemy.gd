@@ -8,6 +8,7 @@ const TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED := 0.7
 const TRAVEL_SPEED := TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED * Player.MAX_SPEED
 const MAX_SLOPE_ANGLE := deg2rad(50.0)
 const STOP_ON_SLOPES := true
+const DAMAGE_TAKEN := 1.0
 
 var timer: Timer
 var path: PoolVector3Array
@@ -15,10 +16,23 @@ var path_index := 0
 var is_facing_direction_of_travel := true
 var velocity := Vector3.ZERO
 
+export (float) var max_health = 3.0
+onready var health = max_health
+
 
 func _ready():
     set_up_timer()
 
+func set_health(value):
+    health = clamp(value, 0, max_health)
+    if health == 0:
+        die()
+
+func take_damage():
+    set_health(health - DAMAGE_TAKEN)
+
+func die():
+    queue_free()
 
 func set_up_timer() -> void:
     timer = Timer.new()
@@ -85,9 +99,17 @@ func travel_along_path(delta: float) -> void:
 
 
 func navigate() -> void:
+    if not Session.level:
+        # Demo level ?
+        return
+
     path = NavigationServer.map_get_path(
         Session.level.map,
         global_translation,
         Session.player.global_translation,
         OPTIMIZE_PATH)
     path_index = 0
+
+
+func _on_Hurtbox_body_entered(body):
+    take_damage()

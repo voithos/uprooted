@@ -6,6 +6,8 @@ var LIFETIME = 2.0
 var age = 0.0
 var is_exploding = false
 
+var bullet_particles = preload("res://scenes/BulletParticles.tscn")
+
 func _physics_process(delta: float) -> void:
     if is_exploding:
         # Wait until particles are done emitting
@@ -17,16 +19,17 @@ func _physics_process(delta: float) -> void:
     
     var collision = move_and_collide(forward_dir * BULLET_SPEED * delta)
     if collision:
-        _explode()
+        global_translation = collision.position
+        explode()
     
     age += delta
     if age > LIFETIME:
-        _explode()
+        explode()
     
-func _explode():
+func explode():
     if is_exploding:
         return
     
     is_exploding = true
     $MeshInstance.hide()
-    $Particles.emitting = true
+    $Particles.emit()

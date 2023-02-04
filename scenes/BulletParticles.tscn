@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/M_Bullet.tres" type="Material" id=1]
+[ext_resource path="res://scenes/BulletParticles.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+width = 256
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+angle = 720.0
+angle_random = 1.0
+scale_curve = SubResource( 6 )
+
+[sub_resource type="SphereMesh" id=7]
+material = ExtResource( 1 )
+radius = 0.125
+height = 0.25
+
+[node name="Particles" type="Particles"]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 4 )
+draw_pass_1 = SubResource( 7 )
+script = ExtResource( 2 )
