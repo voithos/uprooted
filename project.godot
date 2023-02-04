@@ -45,6 +45,11 @@ CheckpointStore="*res://scripts/checkpoint_store.gd"
 
 enabled=PoolStringArray( "res://addons/zylann.hterrain/plugin.cfg" )
 
+[display]
+
+window/size/width=1280
+window/size/height=720
+
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true

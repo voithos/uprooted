@@ -2,21 +2,29 @@ extends KinematicBody
 
 const GRAVITY_MULT := 3.0
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
-onready var GRAVITY = (ProjectSettings.get_setting("physics/3d/default_gravity") 
+onready var GRAVITY: float = (ProjectSettings.get_setting("physics/3d/default_gravity") 
         * GRAVITY_MULT)
 
-const MAX_SPEED = 20
-const JUMP_SPEED = 18
-const ACCEL = 4.5
-const DECEL = 16
+const MAX_SPEED := 20.0
+const JUMP_SPEED := 18.0
+const ACCEL := 4.5
+const DECEL := 16.0
 # How good movement in midair is.
 const AIR_CONTROL := 0.3
-const MAX_SLOPE_ANGLE = 40
-const STOP_ON_SLOPES = true
+const MAX_SLOPE_ANGLE := deg2rad(40.0)
+const STOP_ON_SLOPES := true
+
+const JUMP_RELEASE_MULTIPLIER := 0.5 # Multiplied by velocity if button released
+const FAST_FALL_MULTIPLIER := 1.7 # How much faster fast fall is compared to gravity
 
 var velocity := Vector3()
 var direction := Vector3()
 var snap := Vector3()
+
+# Ye olde terrible boolean state machine
+var is_airborne := false
+var was_airborne := false
+var is_fast_falling := false
 
 func _ready():
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -44,6 +52,7 @@ func process_movement(delta: float) -> void:
     direction = aim.z * -input_axis.x + aim.x * input_axis.y
     
     if is_on_floor():
+        is_airborne = false
         # Handle moving platforms.
         snap = -get_floor_normal() - get_floor_velocity() * delta
         
@@ -54,21 +63,33 @@ func process_movement(delta: float) -> void:
         if Input.is_action_just_pressed("jump"):
             snap = Vector3.ZERO
             velocity.y = JUMP_SPEED
+            is_fast_falling = false
     else:
+        is_airborne = true
         # Workaround for 'vertical bump' when going off platform
         if snap != Vector3.ZERO && velocity.y != 0:
             velocity.y = 0
-        
         snap = Vector3.ZERO
         
-        velocity.y -= GRAVITY * delta
+        if Input.is_action_just_released("jump"):
+            is_fast_falling = true
+            if velocity.y > 0:
+                velocity.y *= JUMP_RELEASE_MULTIPLIER
+        
+        var fall_multiplier = 1.0
+        if is_fast_falling:
+            fall_multiplier = FAST_FALL_MULTIPLIER
+
+        velocity.y -= GRAVITY * fall_multiplier * delta
     
-    accelerate(delta)
+    accelerate_horizontal(delta)
     
     velocity = move_and_slide_with_snap(velocity, snap, Vector3.UP, 
             STOP_ON_SLOPES, 4, MAX_SLOPE_ANGLE)
+    
+    was_airborne = is_airborne
 
-func accelerate(delta: float) -> void:
+func accelerate_horizontal(delta: float) -> void:
     # Using only the horizontal velocity, interpolate towards the input.
     var temp_vel := velocity
     temp_vel.y = 0
@@ -81,7 +102,7 @@ func accelerate(delta: float) -> void:
     else:
         temp_accel = DECEL
     
-    if not is_on_floor():
+    if is_airborne:
         temp_accel *= AIR_CONTROL
     
     temp_vel = temp_vel.linear_interpolate(target, temp_accel * delta)
