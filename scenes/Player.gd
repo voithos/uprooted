@@ -35,6 +35,8 @@ var is_airborne := false
 var was_airborne := false
 var is_fast_falling := false
 
+onready var bullet_spawner = $Head/BulletSpawner
+
 func _ready():
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     
@@ -47,6 +49,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
     process_movement(delta)
+    process_firing(delta)
     
     if Input.is_action_just_pressed("ui_cancel"):
         if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
@@ -149,3 +152,8 @@ func accelerate_horizontal(delta: float) -> void:
 
 func get_foot_position() -> Vector3:
     return global_translation - Vector3(0, collision_extents.y, 0)
+
+func process_firing(delta: float):
+    # TODO: make this auto-fire
+    if Input.is_action_just_pressed("fire"):
+        bullet_spawner.spawn_bullet()

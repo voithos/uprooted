@@ -1,5 +1,7 @@
 extends Spatial
 
+# Misnomer; actually the entire head+camera+gun rotation-y bit
+
 const MOUSE_SENSITIVITY := 2.0 / 1000.0
 const Y_LIMIT := deg2rad(90.0)
 onready var NORMAL_FOV = $Camera.fov
