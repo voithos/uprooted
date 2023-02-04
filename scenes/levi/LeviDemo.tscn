@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/textures/ocean.png" type="Texture" id=7]
 [ext_resource path="res://scenes/level.gd" type="Script" id=8]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/Environment.tres" type="Environment" id=10]
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 7 )
@@ -31,6 +32,9 @@ textures = [ [ ExtResource( 6 ) ], [ ExtResource( 5 ) ] ]
 
 [node name="LeviDemo" type="Spatial"]
 script = ExtResource( 8 )
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 10 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.885085, -0.447853, 0.126696, 0, 0.272213, 0.962237, -0.465429, -0.851662, 0.240932, 216.517, 140.939, 274.37 )
