@@ -7,7 +7,7 @@ onready var GRAVITY: float = (ProjectSettings.get_setting("physics/3d/default_gr
 
 const MIN_DISTANCE_BELOW_SEA_LEVEL := 1.0
 
-const MAX_SPEED := 15.0
+const MAX_SPEED := 5.0
 const SPRINT_MULTIPLIER := 2.0 # Applied to MAX_SPEED to get sprint speed
 const JUMP_SPEED := 18.0
 const ACCEL := 4.5
@@ -104,8 +104,6 @@ func process_movement(delta: float) -> void:
     if !is_airborne:
         previous_ground_position = global_translation
     
-    var previous_foot_position := get_foot_position()
-    
     velocity = move_and_slide_with_snap(velocity, snap, Vector3.UP, 
             STOP_ON_SLOPES, 4, MAX_SLOPE_ANGLE)
     
@@ -126,7 +124,8 @@ func accelerate_horizontal(delta: float) -> void:
     var sprint_multiplier = SPRINT_MULTIPLIER if is_sprinting else 1.0
 
     var temp_accel: float
-    var target: Vector3 = direction * MAX_SPEED * sprint_multiplier
+    var target_speed = MAX_SPEED * sprint_multiplier
+    var target: Vector3 = direction * target_speed
     
     var accel_multiplier = SPRINT_ACCEL_MULTIPLIER if is_sprinting else 1.0
     if direction.dot(temp_vel) > 0:
@@ -141,6 +140,12 @@ func accelerate_horizontal(delta: float) -> void:
     
     velocity.x = temp_vel.x
     velocity.z = temp_vel.z
+    
+    if is_sprinting:
+        var rel = (target / target_speed).dot(velocity / target_speed)
+        $Head.set_zoom_factor(rel)
+    else:
+        $Head.set_zoom_factor(0.0)
 
 func get_foot_position() -> Vector3:
     return global_translation - Vector3(0, collision_extents.y, 0)
