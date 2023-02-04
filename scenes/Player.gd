@@ -36,6 +36,15 @@ var is_airborne := false
 var was_airborne := false
 var is_fast_falling := false
 
+const MAX_HEALTH = 6.0
+var health = MAX_HEALTH
+signal health_changed
+var is_invulnerable := false
+const INVULNERABILITY_AFTER_DAMAGE = 1.0 # Amount of time after taking damage that you're invulnerable
+var invulnerability_timer := 0.0
+
+const DEFAULT_DAMAGE = 1.0  # Damage from basic enemy touch
+
 onready var bullet_spawner = $Head/BulletSpawner
 
 func _ready():
@@ -53,6 +62,8 @@ func _ready():
 func _physics_process(delta: float) -> void:
     process_movement(delta)
     process_firing(delta)
+    
+    _update_invulnerability(delta)
     
     if Input.is_action_just_pressed("ui_cancel"):
         if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
@@ -160,3 +171,49 @@ func process_firing(delta: float):
     # TODO: make this auto-fire
     if Input.is_action_just_pressed("fire"):
         bullet_spawner.spawn_bullet()
+
+func _take_damage(damage):
+    if is_invulnerable:
+        # Hit two things in a single frame; ignore.
+        return
+    set_health(health - damage)
+    print("TAKING DAMAGE", health)
+    _begin_invulernability_after_damage()
+    # TODO: Add camera shake
+
+func _begin_invulernability_after_damage():
+    is_invulnerable = true
+    invulnerability_timer = 0.0
+
+func _update_invulnerability(delta):
+    if is_invulnerable:
+        invulnerability_timer += delta
+        if invulnerability_timer > INVULNERABILITY_AFTER_DAMAGE:
+            is_invulnerable = false
+            call_deferred("_check_for_hitboxes")
+
+func _check_for_hitboxes():
+    yield(get_tree(), "idle_frame")
+    var hitboxes = $Hurtbox.get_overlapping_areas()
+    if len(hitboxes) > 0:
+        _take_damage(DEFAULT_DAMAGE)
+
+func set_health(h):
+    health = min(max(0, h), MAX_HEALTH)
+    emit_signal("health_changed", health, MAX_HEALTH)
+    if health <= 0:
+        die()
+
+func _on_Hurtbox_body_entered(body):
+    _take_damage(DEFAULT_DAMAGE)
+
+func _on_Hurtbox_area_entered(area):
+    _take_damage(DEFAULT_DAMAGE)
+
+func die():
+    queue_free()
+
+    #yield(get_tree().create_timer(1.0), "timeout")
+    
+    #var level = get_tree().get_nodes_in_group("level")[0]
+    #level.begin_reset_transition()
