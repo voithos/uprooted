@@ -1,4 +1,3 @@
-class_name Music
 extends Node
 
 # Music management.
