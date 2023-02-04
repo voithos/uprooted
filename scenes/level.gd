@@ -21,7 +21,7 @@ func set_up_nav_server() -> void:
     NavigationServer.region_set_transform(region, Transform())
     NavigationServer.region_set_map(region, map)
     
-    var navmesh: NavigationMesh = $NavigationMeshInstance.navmesh
+    var navmesh: NavigationMesh = $SmallEnemyNavMesh.navmesh
     NavigationServer.region_set_navmesh(region, navmesh)
     
     call_deferred("_on_ready")

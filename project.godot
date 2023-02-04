@@ -115,6 +115,16 @@ fire={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="enemy"
+3d_physics/layer_3="player"
+3d_physics/layer_4="enemy_projectile"
+3d_physics/layer_5="player_projectile"
+3d_physics/layer_6="pool"
+3d_physics/layer_7="sunlight"
+
 [mono]
 
 project/assembly_name="Global Game Jam 2023"
