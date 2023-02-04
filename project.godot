@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "KinematicBody",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://scenes/Enemy.gd"
+}, {
 "base": "ResourceFormatLoader",
 "class": "HTerrainDataLoader",
 "language": "GDScript",
@@ -18,10 +23,23 @@ _global_script_classes=[ {
 "class": "HTerrainDataSaver",
 "language": "GDScript",
 "path": "res://addons/zylann.hterrain/hterrain_resource_saver.gd"
+}, {
+"base": "Spatial",
+"class": "Level",
+"language": "GDScript",
+"path": "res://scenes/level.gd"
+}, {
+"base": "KinematicBody",
+"class": "Player",
+"language": "GDScript",
+"path": "res://scenes/Player.gd"
 } ]
 _global_script_class_icons={
+"Enemy": "",
 "HTerrainDataLoader": "",
-"HTerrainDataSaver": ""
+"HTerrainDataSaver": "",
+"Level": "",
+"Player": ""
 }
 
 [application]
@@ -40,6 +58,7 @@ Music="*res://scripts/music.gd"
 GlobalCamera="*res://scripts/global_camera.gd"
 GameTimer="*res://scripts/game_timer.gd"
 CheckpointStore="*res://scripts/checkpoint_store.gd"
+Session="*res://scripts/session.gd"
 
 [display]
 

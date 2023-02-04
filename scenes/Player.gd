@@ -1,3 +1,4 @@
+class_name Player
 extends KinematicBody
 
 const GRAVITY_MULT := 3.0
@@ -38,6 +39,8 @@ var is_fast_falling := false
 onready var bullet_spawner = $Head/BulletSpawner
 
 func _ready():
+    Session.player = self
+    
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
     
     collision_extents.x = $CollisionShape.shape.radius

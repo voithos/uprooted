@@ -20,3 +20,17 @@ func _input(event):
             if event.scancode == KEY_P:
                 is_paused = not is_paused
                 get_tree().set_pause(is_paused)
+        
+        if event.scancode == KEY_F1:
+            match Input.get_mouse_mode():
+                Input.MOUSE_MODE_CAPTURED:
+                    Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+                Input.MOUSE_MODE_VISIBLE:
+                    Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+    if event is InputEventMouseButton:
+        # Recapture the mouse when clicking on the screen.
+        if event.button_index == BUTTON_LEFT && event.pressed:
+            Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
