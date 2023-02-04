@@ -5,6 +5,8 @@ const GRAVITY_MULT := 3.0
 onready var GRAVITY: float = (ProjectSettings.get_setting("physics/3d/default_gravity") 
         * GRAVITY_MULT)
 
+const MIN_DISTANCE_BELOW_SEA_LEVEL := 1.0
+
 const MAX_SPEED := 20.0
 const JUMP_SPEED := 18.0
 const ACCEL := 4.5
@@ -17,9 +19,14 @@ const STOP_ON_SLOPES := true
 const JUMP_RELEASE_MULTIPLIER := 0.5 # Multiplied by velocity if button released
 const FAST_FALL_MULTIPLIER := 1.7 # How much faster fast fall is compared to gravity
 
+var collision_extents: Vector3
+
 var velocity := Vector3()
 var direction := Vector3()
 var snap := Vector3()
+
+var previous_position := Vector3.INF
+var previous_ground_position := Vector3.INF
 
 # Ye olde terrible boolean state machine
 var is_airborne := false
@@ -28,6 +35,13 @@ var is_fast_falling := false
 
 func _ready():
     Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+    
+    collision_extents.x = $CollisionShape.shape.radius
+    collision_extents.y = \
+        $CollisionShape.shape.height * 0.5 + $CollisionShape.shape.radius
+    collision_extents.z = $CollisionShape.shape.radius
+    
+    previous_position = global_translation
 
 func _physics_process(delta: float) -> void:
     process_movement(delta)
@@ -84,8 +98,20 @@ func process_movement(delta: float) -> void:
     
     accelerate_horizontal(delta)
     
+    previous_position = global_translation
+    if !is_airborne:
+        previous_ground_position = global_translation
+    
+    var previous_foot_position := get_foot_position()
+    
     velocity = move_and_slide_with_snap(velocity, snap, Vector3.UP, 
             STOP_ON_SLOPES, 4, MAX_SLOPE_ANGLE)
+    
+    var next_foot_position := get_foot_position()
+    
+    # Prevent the player from walking too far out to sea.
+    if next_foot_position.y < -MIN_DISTANCE_BELOW_SEA_LEVEL:
+        global_translation = previous_ground_position
     
     was_airborne = is_airborne
 
@@ -110,3 +136,5 @@ func accelerate_horizontal(delta: float) -> void:
     velocity.x = temp_vel.x
     velocity.z = temp_vel.z
 
+func get_foot_position() -> Vector3:
+    return global_translation - Vector3(0, collision_extents.y, 0)

@@ -41,14 +41,14 @@ GlobalCamera="*res://scripts/global_camera.gd"
 GameTimer="*res://scripts/game_timer.gd"
 CheckpointStore="*res://scripts/checkpoint_store.gd"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/zylann.hterrain/plugin.cfg" )
-
 [display]
 
 window/size/width=1280
 window/size/height=720
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/zylann.hterrain/plugin.cfg" )
 
 [gui]
 
