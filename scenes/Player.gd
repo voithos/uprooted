@@ -8,10 +8,10 @@ onready var GRAVITY: float = (ProjectSettings.get_setting("physics/3d/default_gr
 
 const MIN_DISTANCE_BELOW_SEA_LEVEL := 1.0
 
-const MAX_SPEED := 5.0
+const MAX_SPEED := 10.0
 const SPRINT_MULTIPLIER := 2.0 # Applied to MAX_SPEED to get sprint speed
 const JUMP_SPEED := 18.0
-const ACCEL := 4.5
+const ACCEL := 10.0
 const DECEL := 16.0
 const SPRINT_ACCEL_MULTIPLIER := 1.5
 # How good movement in midair is.
