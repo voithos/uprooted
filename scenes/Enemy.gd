@@ -4,8 +4,9 @@ extends KinematicBody
 
 const NAVIGATION_INTERVAL := 1.0
 const OPTIMIZE_PATH := true
-const TRAVEL_SPEED := 10.0
-const MAX_SLOPE_ANGLE := deg2rad(45.0)
+const TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED := 0.7
+const TRAVEL_SPEED := TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED * Player.MAX_SPEED
+const MAX_SLOPE_ANGLE := deg2rad(50.0)
 const STOP_ON_SLOPES := true
 
 var timer: Timer
@@ -37,14 +38,13 @@ func _physics_process(delta: float):
     if !is_on_floor():
         # While airborne, don't alter horizontal velocity.
         snap = Vector3.ZERO
+        velocity.y -= Session.player.GRAVITY * delta
     elif path.empty() or \
             path_index >= path.size():
         # We aren't navigating.
         velocity = Vector3.ZERO
     else:
         travel_along_path(delta)
-    
-    velocity.y -= Session.player.GRAVITY * delta
     
     move_and_slide_with_snap(
         velocity, snap, Vector3.UP, STOP_ON_SLOPES, 4, MAX_SLOPE_ANGLE)
@@ -54,6 +54,7 @@ func travel_along_path(delta: float) -> void:
     var travel_distance := delta * TRAVEL_SPEED
     var target := path[path_index]
     var displacement_to_target := target - global_translation
+    displacement_to_target.y = 0
     var is_displacement_negligible := \
         displacement_to_target.length_squared() < 0.001
     var travel_direction := \
