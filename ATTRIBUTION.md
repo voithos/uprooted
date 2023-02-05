@@ -9,3 +9,4 @@
 - fireball vfx acquired from https://sketchfab.com/3d-models/fireball-vfx-911322f594b2480e8c3f9d49ff7619c6
 - bubble sfx acquired from https://opengameart.org/content/pop-sounds
 - stream sfx acquired from https://opengameart.org/content/stream-sounds
+- machine sounds acquired from https://opengameart.org/content/30-cc0-sfx-loops

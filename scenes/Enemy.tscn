@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/chainsaw.glb" type="PackedScene" id=2]
 [ext_resource path="res://assets/enemies/lowpoly_mechatank.glb" type="PackedScene" id=3]
 [ext_resource path="res://scenes/gui/BillboardHealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sfx/machine_10.ogg" type="AudioStream" id=5]
 
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.269899, 0.392506, 0.168192 )
@@ -84,5 +85,11 @@ shape = SubResource( 3 )
 [node name="BillboardHealthBar" parent="." instance=ExtResource( 4 )]
 visible = false
 mesh = SubResource( 10 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17905, -1.11198 )
+stream = ExtResource( 5 )
+unit_db = -1.0
+autoplay = true
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
