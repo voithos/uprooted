@@ -20,7 +20,6 @@ const STARTING_WAVE_INDEX_FOR_DEBUGGING := 0
 const EXPLICIT_WAVE_CONFIGS := [
     { small = 1, medium = 4, large = 0 },
     { small = 3, medium = 0, large = 0 },
-    { small = 3, medium = 0, large = 0 },
     { small = 3, medium = 1, large = 0 },
     { small = 3, medium = 0, large = 0 },
     { small = 3, medium = 1, large = 0 }, # Wave 5
