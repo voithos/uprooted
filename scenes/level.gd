@@ -20,6 +20,8 @@ func _ready() -> void:
     add_child(enemy_manager)
     
     call_deferred("set_up_nav_server")
+    
+    Music.play(Music.GAMEPLAY)
 
 
 func set_up_nav_server() -> void:
