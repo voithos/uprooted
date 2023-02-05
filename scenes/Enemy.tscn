@@ -1,25 +1,48 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://assets/enemies/chainsaw.glb" type="PackedScene" id=2]
+[ext_resource path="res://assets/enemies/lowpoly_mechatank.glb" type="PackedScene" id=3]
 
-[sub_resource type="CapsuleShape" id=2]
+[sub_resource type="BoxShape" id=5]
+extents = Vector3( 0.269899, 0.392506, 0.168192 )
+
+[sub_resource type="CapsuleShape" id=4]
+radius = 0.889588
+height = 0.002
 
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=3]
-radius = 1.05
-height = 1.05
+radius = 1.07997
+height = 1.81443
 
 [node name="Enemy" type="KinematicBody"]
 collision_layer = 9
 script = ExtResource( 1 )
 
+[node name="lowpoly_mechatank" parent="." instance=ExtResource( 3 )]
+transform = Transform( -0.004, 0, -3.49691e-10, 0, 0.004, 0, 3.49691e-10, 0, -0.004, 0, 0, 0 )
+
+[node name="chainsaw" parent="lowpoly_mechatank" instance=ExtResource( 2 )]
+transform = Transform( 462.935, 0, 0, 0, 462.935, 0, 0, 0, 462.935, 0, 216.605, 277.447 )
+
+[node name="Hitbox" type="Area" parent="lowpoly_mechatank"]
+transform = Transform( 333.333, 0, 0, 0, 333.333, 0, 0, 0, 333.333, 0, 0, 0 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="lowpoly_mechatank/Hitbox"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.86833, 1.28649 )
+shape = SubResource( 5 )
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 2 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.867823, 0 )
+shape = SubResource( 4 )
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+visible = false
 mesh = SubResource( 1 )
 
 [node name="Hurtbox" type="Area" parent="."]
@@ -27,15 +50,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Hurtbox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-shape = SubResource( 3 )
-
-[node name="Hitbox" type="Area" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="Hitbox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+transform = Transform( 1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0.999368, 0 )
 shape = SubResource( 3 )
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]

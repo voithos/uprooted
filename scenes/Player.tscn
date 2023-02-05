@@ -29,7 +29,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8 )
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.696, -0.346, -0.635474 )
 
 [node name="BulletSpawner" parent="CameraLag/gun" instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.682848, 0.044784, -2.98023e-07 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.891551, 0.044784, -2.98023e-07 )
 
 [node name="Hurtbox" type="Area" parent="."]
 collision_layer = 0
