@@ -1,6 +1,9 @@
 extends Node
 
 
+# TODO: Change this before submitting.
+const IS_DEBUG := true
+
 const WORLD_COLLISION_MASK := 1
 const ENEMY_COLLISION_MASK := 2
 const PLAYER_COLLISION_MASK := 4

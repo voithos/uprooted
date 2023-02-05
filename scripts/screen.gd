@@ -34,3 +34,7 @@ func _unhandled_input(event: InputEvent) -> void:
         # Recapture the mouse when clicking on the screen.
         if event.button_index == BUTTON_LEFT && event.pressed:
             Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func show_game_over_screen() -> void:
+    get_node("/root/Main/GameOverScreen").set_is_open(true)

@@ -43,6 +43,7 @@ var is_unrooting := false
 var is_airborne := false
 var was_airborne := false
 var is_fast_falling := false
+var is_alive := true
 
 onready var gun_initial_translation = $CameraLag/gun.translation
 onready var gun_initial_rot_z = $CameraLag/gun.rotation_degrees.z
@@ -301,7 +302,14 @@ func _on_Hurtbox_area_entered(area):
     _take_damage(DEFAULT_DAMAGE)
 
 func die():
-    queue_free()
+    if !is_alive:
+        return
+    
+    is_alive = false
+    
+    Screen.show_game_over_screen()
+    
+#    queue_free()
 
     #yield(get_tree().create_timer(1.0), "timeout")
     

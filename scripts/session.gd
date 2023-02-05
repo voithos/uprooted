@@ -10,14 +10,18 @@ var is_player_and_level_ready: bool setget ,_get_is_player_and_level_ready
 var waves_completed := 0
 var enemies_destroyed := 0
 var pools_drained := 0
+var score := 0
 
 
 func reset() -> void:
+    if is_instance_valid(Session.level):
+        Session.level.queue_free()
     level = null
     player = null
     waves_completed = 0
     enemies_destroyed = 0
     pools_drained = 0
+    score = 0
 
 
 func _get_is_level_ready() -> bool:
