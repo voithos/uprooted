@@ -4,10 +4,20 @@ extends Spatial
 
 var is_ready := false
 var map: RID
+var terrain: HTerrain
+var pool_manager: PoolManager
+var enemy_manager: EnemyManager
 
 
 func _ready() -> void:
     Session.level = self
+    
+    terrain = $SmallEnemyNavMesh/Terrain
+    
+    pool_manager = PoolManager.new()
+    add_child(pool_manager)
+    enemy_manager = EnemyManager.new()
+    add_child(enemy_manager)
     
     call_deferred("set_up_nav_server")
 

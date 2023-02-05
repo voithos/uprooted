@@ -14,6 +14,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Enemy.gd"
 }, {
+"base": "Node",
+"class": "EnemyManager",
+"language": "GDScript",
+"path": "res://scripts/enemy_manager.gd"
+}, {
+"base": "Spatial",
+"class": "HTerrain",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain.gd"
+}, {
+"base": "Resource",
+"class": "HTerrainData",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain_data.gd"
+}, {
 "base": "ResourceFormatLoader",
 "class": "HTerrainDataLoader",
 "language": "GDScript",
@@ -41,6 +56,9 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Enemy": "",
+"EnemyManager": "",
+"HTerrain": "",
+"HTerrainData": "",
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
 "Level": "",
@@ -65,6 +83,7 @@ GlobalCamera="*res://scripts/global_camera.gd"
 GameTimer="*res://scripts/game_timer.gd"
 CheckpointStore="*res://scripts/checkpoint_store.gd"
 Session="*res://scripts/session.gd"
+Global="*res://scripts/global.gd"
 
 [display]
 

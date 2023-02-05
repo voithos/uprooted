@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://scenes/level.gd" type="Script" id=8]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Environment.tres" type="Environment" id=10]
+[ext_resource path="res://scenes/Pool.tscn" type="PackedScene" id=11]
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 7 )
@@ -70,16 +71,20 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 39.798, 0 )
 [node name="Enemy" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5775, 35.6406, -57.2066 )
 
-[node name="PoolSpawnPositions" type="Spatial" parent="."]
+[node name="Pools" type="Spatial" parent="."]
 
-[node name="Position3D" type="Position3D" parent="PoolSpawnPositions"]
+[node name="Pool" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6955, 23.1552, -72.3675 )
 
-[node name="Position3D2" type="Position3D" parent="PoolSpawnPositions"]
+[node name="Pool2" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.945, 32.1307, 65.0402 )
 
-[node name="Position3D3" type="Position3D" parent="PoolSpawnPositions"]
+[node name="Pool3" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -119.942, 18.3104, -70.8926 )
 
-[node name="Position3D4" type="Position3D" parent="PoolSpawnPositions"]
+[node name="Pool4" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80.2259, 24.9906, 29.4373 )
+
+[node name="EnemySpawnPositions" type="Spatial" parent="."]
+
+[node name="Position3D" type="Position3D" parent="EnemySpawnPositions"]

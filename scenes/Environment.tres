@@ -8,7 +8,6 @@ sun_color = Color( 1, 0.991, 0.46, 1 )
 [resource]
 background_mode = 2
 background_sky = SubResource( 1 )
-fog_enabled = true
 fog_depth_begin = 70.0
 fog_depth_end = 200.0
 tonemap_mode = 2
