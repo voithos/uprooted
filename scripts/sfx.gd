@@ -12,10 +12,21 @@ const BACKGROUND_QUIET_DB = -40.0
 # ========================
 enum {
     EXAMPLE,
+    BUBBLE,
 }
 
 const SAMPLES = {
     EXAMPLE: preload("res://assets/sfx/example.wav"),
+}
+
+const SAMPLESETS = {
+    BUBBLE: [
+        preload("res://assets/sfx/pop1.ogg"),
+        preload("res://assets/sfx/pop2.ogg"),
+        preload("res://assets/sfx/pop6.ogg"),
+        preload("res://assets/sfx/pop8.ogg"),
+        preload("res://assets/sfx/pop10.ogg"),
+    ]
 }
 # ========================
 
@@ -41,14 +52,24 @@ func _get_next_player_idx():
     return next
 
 func play(sample, db=SFX_DB):
-    var idx = _get_next_player_idx()
-    var player = pool[idx]
-    play_with_player(player, sample, db)
-
-# Use this with an audio player that exists in the scene.
-func play_with_player(player, sample, db=SFX_DB):
     assert(sample in SAMPLES)
     var stream = SAMPLES[sample]
+    play_with_next_player(stream, db)
+
+func play_sampleset(sampleset, db=SFX_DB):
+    assert(sampleset in SAMPLESETS)
+    var set = SAMPLESETS[sampleset]
+    # Pick a random sample
+    var stream = set[randi() % set.size()]
+    play_with_next_player(stream, db)
+
+func play_with_next_player(stream, db=SFX_DB):
+    var idx = _get_next_player_idx()
+    var player = pool[idx]
+    play_with_player(player, stream, db)
+
+# Use this with an audio player that exists in the scene.
+func play_with_player(player, stream, db=SFX_DB):
     player.stream = stream
     player.volume_db = db
     player.play()

@@ -269,6 +269,7 @@ func process_firing(delta: float):
         if is_instance_valid(pool):
             pool.consume_water(Pool.SMALL_SHOT_WATER_AMOUNT)
         Session.camera.set_min_trauma(0.4)
+        Sfx.play_sampleset(Sfx.BUBBLE, Sfx.QUIET_DB)
 
 func _can_fire():
     return is_rooted and \
