@@ -111,7 +111,8 @@ func _begin_unrooting():
     is_rooted = false
     # In case we need to override
     if rooting_tween:
-        rooting_tween.stop()
+        rooting_tween.kill()
+        rooting_tween = null
     is_rooting = false
     var tween = get_tree().create_tween()
     tween.tween_property($Head, "translation:y", original_head_y, UNROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
