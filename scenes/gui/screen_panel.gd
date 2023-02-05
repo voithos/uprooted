@@ -35,9 +35,10 @@ func _ready() -> void:
 
 
 func _input(event):
-    if event is InputEventKey and \
-        event.is_pressed() and \
-        can_start_new_level:
+    if (event is InputEventKey or \
+            event is InputEventMouseButton) and \
+            event.is_pressed() and \
+            can_start_new_level:
         _start_new_level()
 
 
