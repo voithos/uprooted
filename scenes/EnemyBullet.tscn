@@ -1,11 +1,33 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/EnemyBullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/vfx/fireball_vfx.glb" type="PackedScene" id=2]
-[ext_resource path="res://scenes/BulletParticles.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/M_EnemyBullet.tres" type="Material" id=3]
 
 [sub_resource type="SphereShape" id=3]
 radius = 0.488074
+
+[sub_resource type="Curve" id=5]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+width = 256
+curve = SubResource( 5 )
+
+[sub_resource type="ParticlesMaterial" id=8]
+spread = 180.0
+gravity = Vector3( 0, 3, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 1.0
+angle = 720.0
+angle_random = 1.0
+scale = 2.0
+scale_curve = SubResource( 6 )
+
+[sub_resource type="SphereMesh" id=10]
+material = ExtResource( 3 )
+radius = 0.125
+height = 0.25
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -22,8 +44,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "spin"
+[sub_resource type="Animation" id=9]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -39,7 +60,7 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -360, 0 ) ]
 }
 
-[node name="Bullet" type="KinematicBody"]
+[node name="EnemyBullet" type="KinematicBody"]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource( 1 )
@@ -51,9 +72,16 @@ shape = SubResource( 3 )
 [node name="fireball_vfx" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.589878, 0 )
 
-[node name="Particles" parent="." instance=ExtResource( 3 )]
+[node name="Particles" type="Particles" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.9
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 8 )
+draw_pass_1 = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "spin"
 anims/RESET = SubResource( 4 )
-anims/spin = SubResource( 5 )
+anims/spin = SubResource( 9 )

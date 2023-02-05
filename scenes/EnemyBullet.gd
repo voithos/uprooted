@@ -31,4 +31,4 @@ func explode():
     
     is_exploding = true
     $fireball_vfx.hide()
-    $Particles.emit()
+    $Particles.emitting = true
