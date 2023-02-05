@@ -84,6 +84,8 @@ func _ready():
     $CameraLag/gun.rotation.z = GUN_SHEATHED_ROT_Z
 
 func _physics_process(delta: float) -> void:
+    if !is_alive:
+        return
     process_movement(delta)
     process_rooting(delta)
     process_firing(delta)
@@ -140,11 +142,15 @@ func _begin_unrooting():
     is_rooting = false
     var tween = get_tree().create_tween()
     tween.tween_property($Head, "translation:y", original_head_y, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-    tween.parallel().tween_property($CameraLag/gun, "translation", GUN_SHEATHED_TRANSLATION, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-    tween.parallel().tween_property($CameraLag/gun, "rotation:z", GUN_SHEATHED_ROT_Z, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+    _sheathe_gun(tween, duration)
     yield(tween, "finished")
     
     is_unrooting = false
+
+# Helper for sheathing so that we can use it while dying
+func _sheathe_gun(tween: SceneTreeTween, duration):
+    tween.parallel().tween_property($CameraLag/gun, "translation", GUN_SHEATHED_TRANSLATION, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+    tween.parallel().tween_property($CameraLag/gun, "rotation:z", GUN_SHEATHED_ROT_Z, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 func process_movement(delta: float) -> void:
     var input_axis = Input.get_vector(
@@ -309,6 +315,10 @@ func die():
         return
     
     is_alive = false
+    
+    if is_rooted or is_rooting:
+        var tween = get_tree().create_tween()
+        _sheathe_gun(tween, UNROOT_DURATION)
     
     Screen.show_game_over_screen()
     
