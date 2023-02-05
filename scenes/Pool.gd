@@ -22,6 +22,9 @@ const _DEHYDRATION_MIN_RADIUS_RATIO := 0.2
 
 const _BASE_SCALE := 5.0
 
+const HYDRATED_COLOR := Color("1c95ff")
+const DEHYDRATED_COLOR := Color("e0c467")
+
 export var max_water_level := DEFAULT_MAX_WATER_LEVEL
 export var min_rehydration_delay := DEFAULT_MIN_REHYDRATION_DELAY
 export var max_rehydration_delay := DEFAULT_MAX_REHYDRATION_DELAY
@@ -35,6 +38,7 @@ var last_dehydration_time := -1.0
 var water_level := 0.0
 var is_rooted := false
 var _next_hydration_toggle_time := INF
+var _latest_interval := INF
 
 var material: ShaderMaterial
 var tween: Tween
@@ -62,6 +66,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     if OS.get_ticks_msec() > _next_hydration_toggle_time:
         _toggle_hydration()
+    
+    var interval_progress := \
+        1.0 - (_next_hydration_toggle_time - OS.get_ticks_msec()) / _latest_interval
+    var hydration_progress := \
+        1.0 - interval_progress if \
+        is_hydrated else \
+        interval_progress
+    $BillboardHealthBar.set_progress(hydration_progress)
 
 
 func on_player_ready() -> void:
@@ -115,6 +127,13 @@ func set_is_hydrated(value: bool) -> void:
     _clear_timeout()
     $Particles.emitting = is_hydrated and !is_rooted
     $Dynamic/Bubbles.emitting = is_hydrated
+    
+    var progress_bar_color := \
+        HYDRATED_COLOR if \
+        is_hydrated else \
+        DEHYDRATED_COLOR
+    $BillboardHealthBar.set_full_color(progress_bar_color)
+    $BillboardHealthBar.set_empty_color(progress_bar_color)
     
     var was_player_near_hydrated_pool: bool = \
         Session.player.get_is_near_hydrated_pool()
@@ -188,7 +207,8 @@ func _on_tween_completed(object: Object, key: NodePath) -> void:
 
 
 func _set_timeout(delay: float) -> void:
-    _next_hydration_toggle_time = OS.get_ticks_msec() + delay * 1000.0
+    _latest_interval = delay * 1000.0
+    _next_hydration_toggle_time = OS.get_ticks_msec() + _latest_interval
 
 
 func _clear_timeout() -> void:
