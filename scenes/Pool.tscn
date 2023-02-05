@@ -111,6 +111,7 @@ shape = SubResource( 5 )
 [node name="Sprite3D" type="Sprite3D" parent="."]
 
 [node name="Particles" type="Particles" parent="."]
+cast_shadow = 0
 amount = 24
 process_material = SubResource( 7 )
 draw_pass_1 = SubResource( 16 )
