@@ -81,4 +81,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90.5483, 17.3325, 14.987 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 74.233, 16.7543, -103.48 )
 
 [node name="Position3D3" type="Position3D" parent="EnemySpawnPositions"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -103.389, 20.5698, -21.6444 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -103.389, 5.64323, -21.6444 )

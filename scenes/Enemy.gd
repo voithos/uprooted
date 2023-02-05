@@ -15,6 +15,18 @@ const SCORES := {
     LARGE: 900,
 }
 
+const HALF_HEIGHT := {
+    SMALL: (0.89 + 0.002) * 0.868,
+    MEDIUM: 0.89,
+    LARGE: 0.89,
+}
+
+const HALF_WIDTH := {
+    SMALL: (0.89 + 0.002) * 0.868,
+    MEDIUM: 0.89,
+    LARGE: 0.89,
+}
+
 const NAVIGATION_INTERVAL := 1.0
 const OPTIMIZE_PATH := true
 const TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED := 0.7

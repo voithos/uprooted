@@ -43,3 +43,36 @@ func _on_ready() -> void:
     is_ready = true
     pool_manager.on_player_ready()
     Screen.get_hud().update_health(true, true)
+
+
+func get_heightmap_height_at_position(position: Vector3) -> float:
+    var from := position
+    from.y = 1000.0
+    
+#    var to := global_translation
+#    to.y = 0.0
+#    var exclude := []
+#    var collision_mask := Global.WORLD_COLLISION_MASK
+#    var collide_with_bodies := true
+#    var collide_with_areas := false
+#    var space_state := get_world().direct_space_state
+#    var result := space_state.intersect_ray(
+#        from,
+#        to,
+#        exclude,
+#        collision_mask,
+#        collide_with_bodies)
+#    global_translation = result.position
+    
+#    var direction := Vector3.DOWN
+#    var max_distance := 1000.0
+#    global_translation = \
+#        Session.level.terrain.cell_raycast(from, direction, max_distance)
+    
+    var heightmap_cell_position: Vector3 = terrain.world_to_map(from)
+    
+#    var heightmap_image: Image = terrain._data.get_image(HTerrainData.CHANNEL_HEIGHT)
+#    var height: float = terrain._get_height_or_default(image, heightmap_cell_position.x, heightmap_cell_position.z)
+
+    return terrain._data.get_height_at(
+        heightmap_cell_position.x, heightmap_cell_position.z)
