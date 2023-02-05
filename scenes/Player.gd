@@ -106,11 +106,15 @@ func _begin_rooting():
     is_rooted = true
     is_rooting = false
     rooting_tween = null
+    if is_instance_valid(pool):
+        pool.set_is_rooted(true)
 
 func _begin_unrooting():
     is_unrooting = true
     # Immediately disengage
     is_rooted = false
+    if is_instance_valid(pool):
+        pool.set_is_rooted(false)
     # In case we need to override
     var duration := UNROOT_DURATION
     if rooting_tween:

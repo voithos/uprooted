@@ -7,6 +7,10 @@ const SMALL_ENEMY_SCENE := preload("res://scenes/Enemy.tscn")
 const MEDIUM_ENEMY_SCENE := preload("res://scenes/Enemy.tscn")
 const LARGE_ENEMY_SCENE := preload("res://scenes/Enemy.tscn")
 
+# TODO: Revent before submitting!
+#const WAVE_PERIOD := 20.0
+const WAVE_PERIOD := 5.0
+
 const STARTING_WAVE_INDEX_FOR_DEBUGGING := 0
 
 # TODO: Test all of this manual and automatic wave-curve configuration.
@@ -39,8 +43,6 @@ const LARGE_ENEMY_COUNT_BASIS := 0.15
 const HEAVY_WAVE_MULTIPLIER := 1.5
 
 const WAVE_COUNT_EXPONENT := 0.8
-
-const WAVE_PERIOD := 20.0
 
 var wave_index := STARTING_WAVE_INDEX_FOR_DEBUGGING
 var spawn_positions := []

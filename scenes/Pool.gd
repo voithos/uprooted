@@ -31,6 +31,7 @@ var is_hydrated := false
 var last_hydration_time := -1.0
 var last_dehydration_time := -1.0
 var water_level := 0.0
+var is_rooted := false
 
 var timer: Timer
 var tween: Tween
@@ -45,13 +46,16 @@ func _ready() -> void:
     add_child(timer)
     
     tween = Tween.new()
+    tween.connect("tween_completed", self, "_on_tween_completed")
     add_child(tween)
     
     var scale_value := _BASE_SCALE * horizontal_scale
-    $Spatial.scale.x = scale_value
-    $Spatial.scale.z = scale_value
-    
+    $Meshes.scale.x = scale_value
+    $Meshes.scale.z = scale_value
     $Area/CollisionShape.shape.radius = scale_value
+    var material: ParticlesMaterial = $Particles.process_material
+    material.emission_ring_radius = scale_value
+    material.emission_ring_inner_radius = scale_value * 0.95
     
     call_deferred("_sanitize_position")
 
@@ -105,6 +109,7 @@ func set_is_hydrated(value: bool) -> void:
     
     is_hydrated = value
     timer.stop()
+    $Particles.emitting = is_hydrated and !is_rooted
     
     var was_player_near_hydrated_pool: bool = \
         Session.player.get_is_near_hydrated_pool()
@@ -131,22 +136,20 @@ func set_is_hydrated(value: bool) -> void:
         Session.player.on_is_near_hydrated_pool_changed()
     
     # Fade in/out.
-    var start: float
+    var water_image: SpatialMaterial = \
+        $Meshes/WaterImage.get_active_material(0)
+    var start := water_image.albedo_color.a
     var end: float
     var duration: float
     var ease_type: int
     if is_hydrated:
-        start = 0.0
         end = 1.0
         duration = _REHYDRATION_FADE_DURATION
         ease_type = Tween.EASE_OUT
     else:
-        start = 1.0
         end = 0.0
         duration = _DEHYDRATION_FADE_DURATION
         ease_type = Tween.EASE_IN
-    var water_image: SpatialMaterial = \
-        $Spatial/WaterImage.get_active_material(0)
     tween.stop_all()
     tween.interpolate_property(
         water_image,
@@ -158,6 +161,16 @@ func set_is_hydrated(value: bool) -> void:
         ease_type,
         0.0)
     tween.start()
+
+
+func set_is_rooted(value) -> void:
+    is_rooted = value
+    $Particles.emitting = is_hydrated and !is_rooted
+
+
+func _on_tween_completed(object: Object, key: NodePath) -> void:
+    if is_hydrated:
+        object.albedo_color.a = 1.0 if is_hydrated else 0.0
 
 
 func consume_water(amount: float) -> void:
