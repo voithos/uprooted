@@ -41,3 +41,4 @@ func _on_ready() -> void:
     # This lets other classes know that the level state is done being
     # initialized.
     is_ready = true
+    pool_manager.on_player_ready()

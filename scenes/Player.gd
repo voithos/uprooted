@@ -280,13 +280,13 @@ func die():
     #var level = get_tree().get_nodes_in_group("level")[0]
     #level.begin_reset_transition()
 
-func set_is_near_pool(is_near_pool: bool, pool: Pool) -> void:
+func set_is_near_pool(is_near_pool: bool, value: Pool) -> void:
     var was_near_hydrated_pool := get_is_near_hydrated_pool()
     if is_near_pool:
-        self.pool = pool
+        pool = value
     else:
-        if self.pool == pool:
-            self.pool = null
+        if pool == value:
+            pool = null
     if get_is_near_hydrated_pool() != was_near_hydrated_pool:
         on_is_near_hydrated_pool_changed()
 

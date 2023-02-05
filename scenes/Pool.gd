@@ -56,6 +56,13 @@ func _ready() -> void:
     call_deferred("_sanitize_position")
 
 
+func on_player_ready() -> void:
+    var starts_hydrated: bool = \
+        Session.level.pool_manager.hydrated_pools.size() < \
+        PoolManager.START_POOL_COUNT
+    set_is_hydrated(starts_hydrated)
+
+
 func _sanitize_position() -> void:
     var from := global_translation
     from.y = 1000.0
@@ -92,12 +99,11 @@ func _toggle_hydration() -> void:
     set_is_hydrated(!is_hydrated)
 
 
-func set_is_hydrated(is_hydrated: bool) -> void:
-    if self.is_hydrated == is_hydrated or \
-            !Session.is_player_and_level_ready:
+func set_is_hydrated(value: bool) -> void:
+    if !Session.is_player_and_level_ready:
         return
     
-    self.is_hydrated = is_hydrated
+    is_hydrated = value
     timer.stop()
     
     var was_player_near_hydrated_pool: bool = \
