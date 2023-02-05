@@ -26,6 +26,9 @@ const _BASE_SCALE := 5.0
 const HYDRATED_COLOR := Color("1c95ff")
 const DEHYDRATED_COLOR := Color("e0c467")
 
+onready var initial_sfx_db = $AudioStreamPlayer3D.unit_db
+const DEHYDRATED_SFX_DB = -20.0
+
 export var max_water_level := DEFAULT_MAX_WATER_LEVEL
 export var min_rehydration_delay := DEFAULT_MIN_REHYDRATION_DELAY
 export var max_rehydration_delay := DEFAULT_MAX_REHYDRATION_DELAY
@@ -182,6 +185,7 @@ func set_is_rooted(value) -> void:
 
 
 func _interpolate_hydration(progress: float) -> void:
+    $AudioStreamPlayer3D.unit_db = lerp(DEHYDRATED_SFX_DB, initial_sfx_db, progress)
     material.set_shader_param("alpha_multiplier", progress)
     
     $Dynamic/Ripples.scale = \

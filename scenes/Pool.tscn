@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://scenes/Pool.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gui/BillboardHealthBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/textures/pool_sand.png" type="Texture" id=3]
 [ext_resource path="res://assets/textures/foam_mask.png" type="Texture" id=4]
+[ext_resource path="res://assets/sfx/stream7.ogg" type="AudioStream" id=5]
 
 [sub_resource type="CylinderShape" id=5]
 height = 3.0
@@ -280,6 +281,11 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4.16
 mesh = SubResource( 28 )
 full_color = Color( 0.109804, 0.584314, 1, 1 )
 empty_color = Color( 0.878431, 0.768627, 0.403922, 1 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 5 )
+unit_db = -1.0
+autoplay = true
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]

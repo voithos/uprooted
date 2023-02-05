@@ -8,3 +8,4 @@
 - gunner enemy acquired from https://sketchfab.com/3d-models/wk5a-9b7559e15007413595690d4fdea711ac
 - fireball vfx acquired from https://sketchfab.com/3d-models/fireball-vfx-911322f594b2480e8c3f9d49ff7619c6
 - bubble sfx acquired from https://opengameart.org/content/pop-sounds
+- stream sfx acquired from https://opengameart.org/content/stream-sounds
