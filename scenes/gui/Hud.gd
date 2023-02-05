@@ -164,6 +164,14 @@ func set_is_pool_hydration_shown(value: bool) -> void:
     if value:
         var color := Session.player.pool.get_progress_bar_color()
         get_node("%HydrationProgress").color = color
+        get_node("%RootedNotNearPool").visible = false
+
+
+func set_is_rooted_not_near_pool_shown(value: bool) -> void:
+    get_node("%RootedNotNearPool").visible = value
+    if value:
+        get_node("%HydrationBar").visible = false
+        get_node("%HydrationBarSpacer").visible = false
 
 
 func _fade_tween_completed(object: Object, key: NodePath) -> void:

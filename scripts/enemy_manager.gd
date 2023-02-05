@@ -11,7 +11,7 @@ const ENEMY_SCENES := {
 
 # TODO: Revent before submitting!
 #const WAVE_PERIOD := 20.0
-const WAVE_PERIOD := 5.0
+const WAVE_PERIOD := 10.0
 
 const STARTING_WAVE_INDEX_FOR_DEBUGGING := 0
 
@@ -20,14 +20,30 @@ const STARTING_WAVE_INDEX_FOR_DEBUGGING := 0
 const EXPLICIT_WAVE_CONFIGS := [
     { small = 1, medium = 4, large = 0 },
     { small = 3, medium = 0, large = 0 },
-    { small = 0, medium = 1, large = 0 },
+    { small = 3, medium = 0, large = 0 },
+    { small = 3, medium = 1, large = 0 },
     { small = 3, medium = 0, large = 0 },
     { small = 3, medium = 1, large = 0 }, # Wave 5
-    { small = 0, medium = 0, large = 1 },
+    { small = 0, medium = 3, large = 0 },
     { small = 3, medium = 0, large = 0 },
     { small = 3, medium = 2, large = 0 },
     { small = 3, medium = 0, large = 0 },
-    { small = 2, medium = 1, large = 1 }, # Wave 10
+    { small = 2, medium = 3, large = 0 }, # Wave 10
+    { small = 2, medium = 2, large = 0 },
+    { small = 5, medium = 0, large = 0 },
+    { small = 3, medium = 2, large = 0 },
+    { small = 7, medium = 0, large = 0 },
+    { small = 2, medium = 3, large = 0 }, # Wave 15
+    { small = 0, medium = 4, large = 0 },
+    { small = 3, medium = 3, large = 0 },
+    { small = 5, medium = 3, large = 0 },
+    { small = 4, medium = 3, large = 0 },
+    { small = 2, medium = 5, large = 0 }, # Wave 20
+    { small = 3, medium = 4, large = 0 },
+    { small = 5, medium = 4, large = 0 },
+    { small = 4, medium = 4, large = 0 },
+    { small = 5, medium = 5, large = 0 },
+    { small = 5, medium = 5, large = 0 }, # Wave 25
 ]
 
 const SMALL_ENEMY_HEAVY_WAVE_PERIOD := 2

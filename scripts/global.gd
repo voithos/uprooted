@@ -2,8 +2,8 @@ extends Node
 
 
 # TODO: Change this before submitting.
-const IS_DEBUG := true
-const CHEAT_CAN_SHOOT_ANYWHERE := true
+const IS_DEBUG := false
+const CHEAT_CAN_SHOOT_ANYWHERE := false
 
 const WORLD_COLLISION_MASK := 1
 const ENEMY_COLLISION_MASK := 2

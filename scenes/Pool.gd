@@ -84,7 +84,11 @@ func on_player_ready() -> void:
     var starts_hydrated: bool = \
         Session.level.pool_manager.hydrated_pools.size() < \
         PoolManager.START_POOL_COUNT
-    set_is_hydrated(starts_hydrated)
+    var delay_ratio := \
+        1.0 if \
+        starts_hydrated else \
+        (randf() * 0.85 + 0.15)
+    set_is_hydrated(starts_hydrated, delay_ratio)
 
 
 func _sanitize_position() -> void:
@@ -98,7 +102,9 @@ func _toggle_hydration() -> void:
     set_is_hydrated(!is_hydrated)
 
 
-func set_is_hydrated(value: bool) -> void:
+func set_is_hydrated(
+        value: bool,
+        delay_ratio := 1.0) -> void:
     if !Session.is_player_and_level_ready:
         return
     
@@ -129,6 +135,8 @@ func set_is_hydrated(value: bool) -> void:
         Session.level.pool_manager.hydrated_pools.erase(self)
         hydration_delay = \
             rand_range(min_rehydration_delay, max_rehydration_delay)
+    
+    hydration_delay *= delay_ratio
     
     if Session.player.get_is_near_hydrated_pool() != \
             was_player_near_hydrated_pool:

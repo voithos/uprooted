@@ -126,6 +126,8 @@ func _begin_rooting():
     rooting_tween = null
     if is_instance_valid(pool):
         pool.set_is_rooted(true)
+    else:
+        Screen.get_hud().set_is_rooted_not_near_pool_shown(true)
 
 func _begin_unrooting():
     is_unrooting = true
@@ -133,6 +135,7 @@ func _begin_unrooting():
     is_rooted = false
     if is_instance_valid(pool):
         pool.set_is_rooted(false)
+    Screen.get_hud().set_is_rooted_not_near_pool_shown(false)
     # In case we need to override
     var duration := UNROOT_DURATION
     if rooting_tween:

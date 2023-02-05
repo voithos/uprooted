@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://scenes/GrassMultiMesh.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Box.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/Pool.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/level/MainLevel_slot1_albedo_bump.packed_tex" type="Texture" id=12]
+[ext_resource path="res://scenes/level/MainLevel_slot1_normal_roughness.packed_tex" type="Texture" id=13]
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_texture = ExtResource( 7 )
@@ -29,7 +31,7 @@ agent_radius = 1.0
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
 mode = 0
-textures = [ [ ExtResource( 5 ) ], [ ExtResource( 6 ) ] ]
+textures = [ [ ExtResource( 5 ), ExtResource( 12 ) ], [ ExtResource( 6 ), ExtResource( 13 ) ] ]
 
 [sub_resource type="CubeMesh" id=7]
 size = Vector3( 24, 8, 8 )
