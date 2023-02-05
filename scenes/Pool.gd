@@ -3,20 +3,28 @@ extends Spatial
 
 
 const DOES_CONSUMING_WATER_DRAIN_POOL := false
+const DOES_POOL_HYDRATION_TOGGLE_ON_DELAY := true
 
 const DEFAULT_MAX_WATER_LEVEL := 27.0
-const DEFAULT_MIN_REHYDRATION_DELAY := 60.0
-const DEFAULT_MAX_REHYDRATION_DELAY := 240.0
+const DEFAULT_MIN_REHYDRATION_DELAY := 10.0
+const DEFAULT_MAX_REHYDRATION_DELAY := 30.0
+const DEFAULT_MIN_DEHYDRATION_DELAY := 10.0
+const DEFAULT_MAX_DEHYDRATION_DELAY := 30.0
 
 const SMALL_SHOT_WATER_AMOUNT := 1.0
 const MEDIUM_SHOT_WATER_AMOUNT := 3.0
 const LARGE_SHOT_WATER_AMOUNT := 9.0
+
+const _REHYDRATION_FADE_DURATION := 1.0
+const _DEHYDRATION_FADE_DURATION := 3.0
 
 const _BASE_SCALE := 5.0
 
 export var max_water_level := DEFAULT_MAX_WATER_LEVEL
 export var min_rehydration_delay := DEFAULT_MIN_REHYDRATION_DELAY
 export var max_rehydration_delay := DEFAULT_MAX_REHYDRATION_DELAY
+export var min_dehydration_delay := DEFAULT_MIN_DEHYDRATION_DELAY
+export var max_dehydration_delay := DEFAULT_MAX_DEHYDRATION_DELAY
 export var horizontal_scale := 1.0
 
 var is_hydrated := false
@@ -25,6 +33,7 @@ var last_dehydration_time := -1.0
 var water_level := 0.0
 
 var timer: Timer
+var tween: Tween
 
 
 func _ready() -> void:
@@ -32,8 +41,11 @@ func _ready() -> void:
     timer.one_shot = true
     timer.autostart = false
     timer.wait_time = min_rehydration_delay
-    timer.connect("timeout", self, "_rehydrate")
+    timer.connect("timeout", self, "_toggle_hydration")
     add_child(timer)
+    
+    tween = Tween.new()
+    add_child(tween)
     
     var scale_value := _BASE_SCALE * horizontal_scale
     $Spatial.scale.x = scale_value
@@ -76,11 +88,14 @@ func _sanitize_position() -> void:
     global_translation.y = height
 
 
-func _rehydrate() -> void:
-    set_is_hydrated(true)
+func _toggle_hydration() -> void:
+    set_is_hydrated(!is_hydrated)
 
 
 func set_is_hydrated(is_hydrated: bool) -> void:
+    if self.is_hydrated == is_hydrated:
+        return
+    
     self.is_hydrated = is_hydrated
     timer.stop()
     
@@ -92,6 +107,9 @@ func set_is_hydrated(is_hydrated: bool) -> void:
         water_level = max_water_level
         Session.level.pool_manager.dehydrated_pools.erase(self)
         Session.level.pool_manager.hydrated_pools[self] = true
+        timer.wait_time = \
+            rand_range(min_dehydration_delay, max_dehydration_delay)
+        timer.start()
     else:
         last_dehydration_time = OS.get_ticks_msec()
         water_level = 0.0
@@ -104,6 +122,35 @@ func set_is_hydrated(is_hydrated: bool) -> void:
     if Session.player.get_is_near_hydrated_pool() != \
             was_player_near_hydrated_pool:
         Session.player.on_is_near_hydrated_pool_changed()
+    
+    # Fade in/out.
+    var start: float
+    var end: float
+    var duration: float
+    var ease_type: int
+    if is_hydrated:
+        start = 0.0
+        end = 1.0
+        duration = _REHYDRATION_FADE_DURATION
+        ease_type = Tween.EASE_OUT
+    else:
+        start = 1.0
+        end = 0.0
+        duration = _DEHYDRATION_FADE_DURATION
+        ease_type = Tween.EASE_IN
+    var water_image: SpatialMaterial = \
+        $Spatial/WaterImage.get_active_material(0)
+    tween.stop_all()
+    tween.interpolate_property(
+        water_image,
+        "albedo_color:a",
+        start,
+        end,
+        duration,
+        Tween.TRANS_QUAD,
+        ease_type,
+        0.0)
+    tween.start()
 
 
 func consume_water(amount: float) -> void:

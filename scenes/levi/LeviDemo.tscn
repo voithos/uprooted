@@ -73,17 +73,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5775, 35.6406, -57.2066 )
 
 [node name="Pools" type="Spatial" parent="."]
 
-[node name="Pool" parent="Pools" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6955, 23.1552, -72.3675 )
-
 [node name="Pool2" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -42.945, 32.1307, 65.0402 )
-
-[node name="Pool3" parent="Pools" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -119.942, 18.3104, -70.8926 )
-
-[node name="Pool4" parent="Pools" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 80.2259, 24.9906, 29.4373 )
 
 [node name="EnemySpawnPositions" type="Spatial" parent="."]
 

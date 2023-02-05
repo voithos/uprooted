@@ -43,7 +43,7 @@ func set_up_timer() -> void:
 
 
 func _physics_process(delta: float):
-    if !Session.is_level_ready:
+    if !Session.is_level_ready || !is_instance_valid(Session.player):
         return
     
     # Handle moving platforms.
