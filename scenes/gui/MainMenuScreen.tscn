@@ -69,147 +69,164 @@ mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
 margin_top = 189.0
 margin_right = 504.0
 margin_bottom = 345.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
-margin_right = 504.0
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+margin_right = 122.0
+margin_bottom = 156.0
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 122.0
+margin_right = 382.0
+margin_bottom = 156.0
+rect_min_size = Vector2( 260, 0 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+margin_right = 260.0
 margin_bottom = 26.0
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_right = 49.0
 margin_bottom = 26.0
 text = "Move"
 
-[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 49.0
-margin_right = 455.0
+margin_right = 211.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 455.0
-margin_right = 504.0
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 211.0
+margin_right = 260.0
 margin_bottom = 26.0
 text = "WASD"
 align = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 26.0
-margin_right = 504.0
+margin_right = 260.0
 margin_bottom = 52.0
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 72.0
 margin_bottom = 26.0
 text = "Rotate"
 
-[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
 margin_left = 72.0
-margin_right = 443.0
+margin_right = 199.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 443.0
-margin_right = 504.0
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 199.0
+margin_right = 260.0
 margin_bottom = 26.0
 text = "Mouse"
 align = 2
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 52.0
-margin_right = 504.0
+margin_right = 260.0
 margin_bottom = 78.0
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer6"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6"]
 margin_right = 48.0
 margin_bottom = 26.0
 text = "Root"
 
-[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer6"]
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6"]
 margin_left = 48.0
-margin_right = 418.0
+margin_right = 174.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer6"]
-margin_left = 418.0
-margin_right = 504.0
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer6"]
+margin_left = 174.0
+margin_right = 260.0
 margin_bottom = 26.0
 text = "R-Click"
 align = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 78.0
-margin_right = 504.0
+margin_right = 260.0
 margin_bottom = 104.0
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
 margin_right = 60.0
 margin_bottom = 26.0
 text = "Shoot"
 
-[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
 margin_left = 60.0
-margin_right = 418.0
+margin_right = 174.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
-margin_left = 418.0
-margin_right = 504.0
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 174.0
+margin_right = 260.0
 margin_bottom = 26.0
 text = "L-Click"
 align = 2
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 104.0
-margin_right = 504.0
+margin_right = 260.0
 margin_bottom = 130.0
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer5"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
 margin_right = 49.0
 margin_bottom = 26.0
 text = "Jump"
 
-[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer5"]
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
 margin_left = 49.0
-margin_right = 444.0
+margin_right = 200.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer5"]
-margin_left = 444.0
-margin_right = 504.0
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 200.0
+margin_right = 260.0
 margin_bottom = 26.0
 text = "Space"
 align = 2
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 130.0
-margin_right = 504.0
+margin_right = 260.0
 margin_bottom = 156.0
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
 margin_right = 72.0
 margin_bottom = 26.0
 text = "Sprint"
 
-[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
 margin_left = 72.0
-margin_right = 419.0
+margin_right = 175.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
-margin_left = 419.0
-margin_right = 504.0
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 175.0
+margin_right = 260.0
 margin_bottom = 26.0
 text = "L-Shift"
 align = 2
+
+[node name="Control2" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+margin_left = 382.0
+margin_right = 504.0
+margin_bottom = 156.0
+size_flags_horizontal = 3
 
 [node name="Padding4" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer"]
 margin_left = 252.0

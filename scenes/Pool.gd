@@ -1,3 +1,4 @@
+tool
 class_name Pool
 extends Spatial
 
@@ -31,6 +32,7 @@ export var max_rehydration_delay := DEFAULT_MAX_REHYDRATION_DELAY
 export var min_dehydration_delay := DEFAULT_MIN_DEHYDRATION_DELAY
 export var max_dehydration_delay := DEFAULT_MAX_DEHYDRATION_DELAY
 export var horizontal_scale := 1.0
+export var keep_encoded_height := false
 
 var is_hydrated := false
 var last_hydration_time := -1.0
@@ -86,6 +88,8 @@ func on_player_ready() -> void:
 
 
 func _sanitize_position() -> void:
+    if keep_encoded_height:
+        return
     global_translation.y = \
         Session.level.get_heightmap_height_at_position(global_translation)
 
