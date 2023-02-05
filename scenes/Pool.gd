@@ -93,7 +93,8 @@ func _toggle_hydration() -> void:
 
 
 func set_is_hydrated(is_hydrated: bool) -> void:
-    if self.is_hydrated == is_hydrated:
+    if self.is_hydrated == is_hydrated or \
+            !Session.is_player_and_level_ready:
         return
     
     self.is_hydrated = is_hydrated

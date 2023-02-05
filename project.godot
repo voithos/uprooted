@@ -81,7 +81,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Global Game Jam 2023"
-run/main_scene="res://scenes/zaven/Demo.tscn"
+run/main_scene="res://scenes/level/MainLevel.tscn"
 config/icon="res://icon.png"
 
 [autoload]

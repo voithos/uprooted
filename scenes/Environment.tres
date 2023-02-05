@@ -3,6 +3,8 @@
 [sub_resource type="ProceduralSky" id=1]
 sky_top_color = Color( 0.313726, 0.666667, 1, 1 )
 sky_horizon_color = Color( 0.709804, 0.835294, 0.960784, 1 )
+ground_bottom_color = Color( 0.388235, 0.690196, 0.956863, 1 )
+ground_horizon_color = Color( 0.247059, 0.458824, 0.639216, 1 )
 sun_color = Color( 1, 0.991, 0.46, 1 )
 
 [resource]

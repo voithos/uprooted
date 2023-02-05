@@ -43,7 +43,7 @@ func set_up_timer() -> void:
 
 
 func _physics_process(delta: float):
-    if !Session.is_level_ready || !is_instance_valid(Session.player):
+    if !Session.is_player_and_level_ready:
         return
     
     # Handle moving platforms.
@@ -90,6 +90,7 @@ func travel_along_path(delta: float) -> void:
     
     var travel_velocity := displacement_to_target / delta
     velocity.x = travel_velocity.x
+    velocity.y = 0.0
     velocity.z = travel_velocity.z
     
     # Face the direction we move.
@@ -99,7 +100,7 @@ func travel_along_path(delta: float) -> void:
 
 
 func navigate() -> void:
-    if Session.is_level_ready or !is_instance_valid(Session.player) or !Session.level:
+    if !Session.is_player_and_level_ready:
         # Demo level ?
         return
 
