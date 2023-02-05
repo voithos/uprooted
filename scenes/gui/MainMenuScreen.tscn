@@ -195,12 +195,12 @@ margin_right = 254.0
 margin_bottom = 156.0
 
 [node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
-margin_right = 48.0
+margin_right = 72.0
 margin_bottom = 26.0
-text = "Dash"
+text = "Sprint"
 
 [node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
-margin_left = 48.0
+margin_left = 72.0
 margin_right = 169.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
