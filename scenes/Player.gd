@@ -53,7 +53,7 @@ var invulnerability_timer := 0.0
 
 const DEFAULT_DAMAGE = 1.0  # Damage from basic enemy touch
 
-onready var bullet_spawner = $Head/BulletSpawner
+onready var bullet_spawner = $Head/gun/BulletSpawner
 onready var original_head_y = $Head.translation.y
 
 var pool: Pool
