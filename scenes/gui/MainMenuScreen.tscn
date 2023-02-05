@@ -36,35 +36,35 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
-margin_left = 405.0
-margin_top = 279.0
-margin_right = 875.0
-margin_bottom = 440.0
+margin_left = 513.0
+margin_top = 287.0
+margin_right = 767.0
+margin_bottom = 432.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Padding" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_right = 470.0
+margin_right = 254.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_top = 4.0
-margin_right = 470.0
-margin_bottom = 63.0
+margin_left = 11.0
+margin_right = 243.0
+margin_bottom = 59.0
 size_flags_horizontal = 4
 custom_colors/font_color = Color( 0, 0.858824, 0.376471, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = "Some clever title"
+text = "Uprooted"
 align = 1
 
 [node name="Padding2" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_left = 235.0
-margin_top = 67.0
-margin_right = 235.0
-margin_bottom = 127.0
+margin_left = 127.0
+margin_top = 59.0
+margin_right = 127.0
+margin_bottom = 119.0
 rect_min_size = Vector2( 0, 60 )
 mouse_filter = 2
 size_flags_horizontal = 4
@@ -72,18 +72,17 @@ size_flags_vertical = 4
 
 [node name="PressAnyKey" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
-margin_left = 108.0
-margin_top = 131.0
-margin_right = 362.0
-margin_bottom = 157.0
+margin_top = 119.0
+margin_right = 254.0
+margin_bottom = 145.0
 size_flags_horizontal = 4
 text = "Press any key to start."
 align = 1
 
 [node name="Padding3" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_top = 161.0
-margin_right = 470.0
-margin_bottom = 161.0
+margin_top = 145.0
+margin_right = 254.0
+margin_bottom = 145.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
