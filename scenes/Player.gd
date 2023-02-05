@@ -53,7 +53,7 @@ var invulnerability_timer := 0.0
 
 const DEFAULT_DAMAGE = 1.0  # Damage from basic enemy touch
 
-onready var bullet_spawner = $Head/gun/BulletSpawner
+onready var bullet_spawner = $CameraLag/gun/BulletSpawner
 onready var original_head_y = $Head.translation.y
 
 var pool: Pool
@@ -76,6 +76,7 @@ func _physics_process(delta: float) -> void:
     process_firing(delta)
     
     _update_invulnerability(delta)
+    _update_camera_lag(delta)
     
     if Input.is_action_just_pressed("ui_cancel"):
         if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
@@ -226,6 +227,13 @@ func accelerate_horizontal(delta: float) -> void:
 
 func get_foot_position() -> Vector3:
     return global_translation - Vector3(0, collision_extents.y, 0)
+
+func _update_camera_lag(delta: float):
+    var lag_rot = $CameraLag.global_transform.basis.get_rotation_quat()
+    var head_rot = $Head.global_transform.basis.get_rotation_quat()
+    # TODO: This only lags along the vertical axis. In order to properly lag, it should be outside the Player body, which rotates horizontally.
+    var vert_rot = lag_rot.slerp(head_rot, 10 * delta)
+    $CameraLag.global_transform.basis = Basis(vert_rot)
 
 func process_firing(delta: float):
     # TODO: make this auto-fire

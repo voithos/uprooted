@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Head.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/player/gun.glb" type="PackedScene" id=3]
+[ext_resource path="res://scenes/BulletSpawner.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape" id=1]
 
@@ -18,7 +20,16 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0
 shape = SubResource( 1 )
 
 [node name="Head" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.51538, -0.789885 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.515, -0.8 )
+
+[node name="CameraLag" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.8 )
+
+[node name="gun" parent="CameraLag" instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.696, -0.346, -0.635474 )
+
+[node name="BulletSpawner" parent="CameraLag/gun" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.682848, 0.044784, -2.98023e-07 )
 
 [node name="Hurtbox" type="Area" parent="."]
 collision_layer = 0
