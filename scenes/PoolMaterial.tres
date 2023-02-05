@@ -1,0 +1,113 @@
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
+
+[ext_resource path="res://assets/textures/foam_mask.png" type="Texture" id=1]
+
+[sub_resource type="Shader" id=17]
+code = "shader_type spatial;
+
+uniform sampler2D caustics_texture : hint_black;
+uniform sampler2D color_gradient : hint_albedo;
+uniform sampler2D distort_noise : hint_black;
+
+uniform float flow_speed = 0.3;
+uniform float vignette_size = 0.3;
+uniform float vignette_blend = 0.1;
+uniform float distort_strength = 0.1;
+uniform float disc_speed = 0.5;
+
+uniform float transparency_fade_start_radius = 0.7;
+uniform float transparency_fade_end_radius = 0.9;
+
+uniform float alpha_multiplier = 1.0;
+
+const float TAU = 6.283185307;
+
+vec2 polar_coordinates(vec2 uv, vec2 center, float zoom, float repeat)
+{
+    vec2 dir = uv - center;
+    highp float radius = length(dir) * 2.0;
+    highp float angle = atan(dir.y, dir.x) / TAU;
+    return mod(vec2(radius * zoom, angle * repeat), 1.0);
+}
+
+//void vertex(){
+//    float dn = texture(distort_noise, UV + TIME * 0.1).r;
+//    VERTEX.y += dn * 0.1;
+//}
+
+void fragment(){
+    // Polar UVs + Noise for caustics
+    vec2 base_uv = UV;
+    float dn = texture(distort_noise, UV + TIME * 0.1).r;
+    base_uv += dn * distort_strength;
+    base_uv -= distort_strength / 2.0;
+    highp vec2 polar_uv = polar_coordinates(base_uv, vec2(0.5), 1.0, 1.0);
+    polar_uv.x -= TIME * flow_speed;
+    float caus = texture(caustics_texture, polar_uv).r;
+    
+    // Fade out caustics
+    float cd = distance(UV, vec2(0.5));
+    float vign = 1.0 - smoothstep(vignette_size, vignette_size + vignette_blend, cd);
+    
+    // Color the caustics
+    float grad_uv = caus * vign;
+    vec3 color = texture(color_gradient, vec2(grad_uv)).rgb;
+    
+    // Center discs
+    float global_disc = 0.0;
+    for (int i = 0; i < 20; i++){
+        float offset = float(i) * 0.2;
+        float radius_disc = 0.8;
+        float loop = fract((TIME + offset) * disc_speed) * radius_disc;
+        float disc = smoothstep(cd, cd + 0.01, loop);
+        float fade = abs(loop - radius_disc);
+        fade = pow(fade, 5.0);
+        disc *= fade;
+        disc = clamp(disc, 0.0, 1.0);
+        global_disc += disc;
+    }
+    global_disc *= 0.6;
+    
+    ALBEDO = color + global_disc;
+    
+    // Opacity gradient.
+    vec2 dir = base_uv - vec2(0.5);
+    highp float radius = length(dir) * 2.0;
+    radius = clamp(
+        radius,
+        transparency_fade_start_radius,
+        transparency_fade_end_radius);
+    highp float progress =
+        (radius - transparency_fade_start_radius) /
+        (transparency_fade_end_radius - transparency_fade_start_radius);
+    // Ease-in.
+    progress = progress * progress;
+    
+    ALPHA = (1.0 - progress) * alpha_multiplier;
+}
+"
+
+[sub_resource type="Gradient" id=20]
+colors = PoolColorArray( 0.117647, 0.498039, 0.831373, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=21]
+gradient = SubResource( 20 )
+
+[sub_resource type="OpenSimplexNoise" id=22]
+
+[sub_resource type="NoiseTexture" id=23]
+noise = SubResource( 22 )
+
+[resource]
+shader = SubResource( 17 )
+shader_param/flow_speed = 0.3
+shader_param/vignette_size = 0.25
+shader_param/vignette_blend = 0.15
+shader_param/distort_strength = 0.1
+shader_param/disc_speed = 0.5
+shader_param/transparency_fade_start_radius = 0.7
+shader_param/transparency_fade_end_radius = 0.9
+shader_param/alpha_multiplier = 1.0
+shader_param/caustics_texture = ExtResource( 1 )
+shader_param/color_gradient = SubResource( 21 )
+shader_param/distort_noise = SubResource( 23 )
