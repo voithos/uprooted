@@ -1,20 +1,16 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://assets/enemies/chainsaw.glb" type="PackedScene" id=2]
-[ext_resource path="res://assets/enemies/lowpoly_mechatank.glb" type="PackedScene" id=3]
+[ext_resource path="res://assets/enemies/wk5a.glb" type="PackedScene" id=2]
 [ext_resource path="res://scenes/gui/BillboardHealthBar.tscn" type="PackedScene" id=4]
 
-[sub_resource type="BoxShape" id=5]
-extents = Vector3( 0.269899, 0.392506, 0.168192 )
-
 [sub_resource type="CapsuleShape" id=4]
-radius = 0.889588
-height = 0.002
+radius = 1.17422
+height = 0.200707
 
 [sub_resource type="CapsuleShape" id=3]
-radius = 1.05
-height = 1.05
+radius = 1.19536
+height = 0.002
 
 [sub_resource type="Shader" id=8]
 code = "shader_type spatial;
@@ -53,24 +49,13 @@ size = Vector2( 1.6, 0.2 )
 [node name="Enemy" type="KinematicBody"]
 collision_layer = 9
 script = ExtResource( 1 )
+type = 2
 
-[node name="lowpoly_mechatank" parent="." instance=ExtResource( 3 )]
-transform = Transform( -0.004, 0, -3.49691e-10, 0, 0.004, 0, 3.49691e-10, 0, -0.004, 0, 0, 0 )
-
-[node name="chainsaw" parent="lowpoly_mechatank" instance=ExtResource( 2 )]
-transform = Transform( 462.935, 0, 0, 0, 462.935, 0, 0, 0, 462.935, 0, 216.605, 277.447 )
-
-[node name="Hitbox" type="Area" parent="lowpoly_mechatank"]
-transform = Transform( 333.333, 0, 0, 0, 333.333, 0, 0, 0, 333.333, 0, 0, 0 )
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape" type="CollisionShape" parent="lowpoly_mechatank/Hitbox"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.86833, 1.28649 )
-shape = SubResource( 5 )
+[node name="we" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1.43898e-08, 0, 0.329201, 0, 0.329201, 0, -0.329201, 0, -1.43898e-08, 0, 0.154649, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.867823, 0 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.27557, 1.41557e-08 )
 shape = SubResource( 4 )
 
 [node name="Hurtbox" type="Area" parent="."]
@@ -78,7 +63,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape" type="CollisionShape" parent="Hurtbox"]
-transform = Transform( 1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0.999368, 0 )
+transform = Transform( 1.1793, 0, 0, 0, 1.1793, -1.25691e-14, 0, 1.25691e-14, 1.1793, 0, 1.32525, 0 )
 shape = SubResource( 3 )
 
 [node name="BillboardHealthBar" parent="." instance=ExtResource( 4 )]

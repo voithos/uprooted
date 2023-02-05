@@ -5,7 +5,7 @@ extends Node
 const ENEMY_SCENES := {
     Enemy.SMALL: preload("res://scenes/Enemy.tscn"),
     # TODO: Create other enemy types
-    Enemy.MEDIUM: preload("res://scenes/Enemy.tscn"),
+    Enemy.MEDIUM: preload("res://scenes/GunnerEnemy.tscn"),
     Enemy.LARGE: preload("res://scenes/Enemy.tscn"),
 }
 
@@ -105,8 +105,9 @@ func _spawn_next_wave() -> void:
         _spawn_enemy(Enemy.SMALL)
     for i in range(medium_count):
         _spawn_enemy(Enemy.MEDIUM)
-    for i in range(large_count):
-        _spawn_enemy(Enemy.LARGE)
+    # TODO: Large enemies currently disabled
+    #for i in range(large_count):
+        #_spawn_enemy(Enemy.LARGE)
     
     for i in range(spawn_position_offset_distances.size()):
         spawn_position_offset_distances[i] = 0.0

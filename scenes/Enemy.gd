@@ -5,7 +5,7 @@ extends KinematicBody
 enum {
     UNKNOWN,
     SMALL,
-    MEDIUM,
+    MEDIUM, # Gunner
     LARGE,
 }
 
@@ -29,7 +29,7 @@ const HALF_WIDTH := {
 
 const NAVIGATION_INTERVAL := 1.0
 const OPTIMIZE_PATH := true
-const TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED := 0.75
+export var TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED := 0.75
 const TRAVEL_SPEED_RANDOM_SLOWDOWN_RATIO := 0.18
 const TRAVEL_DIRECTION_RANDOM_DEVIATION_MAX := PI / 15
 const MAX_SLOPE_ANGLE := deg2rad(50.0)
