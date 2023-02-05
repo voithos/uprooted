@@ -37,9 +37,11 @@ export var type := SMALL
 
 func _ready():
     set_up_timer()
+    set_health(max_health)
 
 func set_health(value):
     health = clamp(value, 0, max_health)
+    $BillboardHealthBar.set_progress(health / max_health)
     if health == 0:
         die()
 

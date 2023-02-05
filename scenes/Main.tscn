@@ -21,4 +21,3 @@ margin_bottom = 843.0
 modulate = Color( 1, 1, 1, 0 )
 
 [node name="Hud" parent="." instance=ExtResource( 2 )]
-margin_right = -174.0

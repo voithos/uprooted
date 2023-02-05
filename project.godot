@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "MeshInstance",
+"class": "BillboardHealthBar",
+"language": "GDScript",
+"path": "res://scenes/gui/BillboardHealthBar.gd"
+}, {
 "base": "KinematicBody",
 "class": "Enemy",
 "language": "GDScript",
@@ -85,6 +90,7 @@ _global_script_classes=[ {
 "path": "res://addons/zylann.hterrain/hterrain.gd"
 } ]
 _global_script_class_icons={
+"BillboardHealthBar": "",
 "Enemy": "",
 "EnemyManager": "",
 "GameOverScreen": "",
