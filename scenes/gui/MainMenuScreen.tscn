@@ -37,9 +37,9 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
 margin_left = 513.0
-margin_top = 287.0
+margin_top = 110.0
 margin_right = 767.0
-margin_bottom = 432.0
+margin_bottom = 609.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -70,19 +70,190 @@ mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="PressAnyKey" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
 margin_top = 119.0
 margin_right = 254.0
-margin_bottom = 145.0
+margin_bottom = 275.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_right = 254.0
+margin_bottom = 26.0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_right = 49.0
+margin_bottom = 26.0
+text = "Move"
+
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 49.0
+margin_right = 205.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+margin_left = 205.0
+margin_right = 254.0
+margin_bottom = 26.0
+text = "WASD"
+align = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 254.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 72.0
+margin_bottom = 26.0
+text = "Rotate"
+
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 72.0
+margin_right = 193.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 193.0
+margin_right = 254.0
+margin_bottom = 26.0
+text = "Mouse"
+align = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_top = 52.0
+margin_right = 254.0
+margin_bottom = 78.0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer6"]
+margin_right = 48.0
+margin_bottom = 26.0
+text = "Root"
+
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer6"]
+margin_left = 48.0
+margin_right = 168.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer6"]
+margin_left = 168.0
+margin_right = 254.0
+margin_bottom = 26.0
+text = "R-Click"
+align = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_top = 78.0
+margin_right = 254.0
+margin_bottom = 104.0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_right = 60.0
+margin_bottom = 26.0
+text = "Shoot"
+
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 60.0
+margin_right = 168.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+margin_left = 168.0
+margin_right = 254.0
+margin_bottom = 26.0
+text = "L-Click"
+align = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 254.0
+margin_bottom = 130.0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer5"]
+margin_right = 49.0
+margin_bottom = 26.0
+text = "Jump"
+
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 49.0
+margin_right = 194.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer5"]
+margin_left = 194.0
+margin_right = 254.0
+margin_bottom = 26.0
+text = "Space"
+align = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer"]
+margin_top = 130.0
+margin_right = 254.0
+margin_bottom = 156.0
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
+margin_right = 48.0
+margin_bottom = 26.0
+text = "Dash"
+
+[node name="Control" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 48.0
+margin_right = 169.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer/VBoxContainer/HBoxContainer4"]
+margin_left = 169.0
+margin_right = 254.0
+margin_bottom = 26.0
+text = "L-Shift"
+align = 2
+
+[node name="Padding4" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_left = 127.0
+margin_top = 275.0
+margin_right = 127.0
+margin_bottom = 335.0
+rect_min_size = Vector2( 0, 60 )
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label3" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_top = 335.0
+margin_right = 254.0
+margin_bottom = 413.0
+custom_colors/font_color = Color( 1, 0.959333, 0.39, 1 )
+text = "You must be rooted at a pool of water before you can shoot."
+align = 1
+autowrap = true
+
+[node name="Padding5" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer"]
+margin_left = 127.0
+margin_top = 413.0
+margin_right = 127.0
+margin_bottom = 473.0
+rect_min_size = Vector2( 0, 60 )
+mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="PressAnyKey" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+margin_top = 473.0
+margin_right = 254.0
+margin_bottom = 499.0
 size_flags_horizontal = 4
 text = "Press any key to start."
 align = 1
 
 [node name="Padding3" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer"]
-margin_top = 145.0
+margin_top = 499.0
 margin_right = 254.0
-margin_bottom = 145.0
+margin_bottom = 499.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
