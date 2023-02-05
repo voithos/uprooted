@@ -159,7 +159,8 @@ func process_movement(delta: float) -> void:
     # Convert input to 3D direction vector.
     direction = aim.z * -input_axis.x + aim.x * input_axis.y
     
-    if _is_in_root_state():
+    var in_root_state = _is_in_root_state()
+    if in_root_state:
         direction = Vector3()
     
     if is_on_floor():
@@ -171,7 +172,7 @@ func process_movement(delta: float) -> void:
         if velocity.y < 0:
             velocity.y = 0
         
-        if Input.is_action_just_pressed("jump"):
+        if Input.is_action_just_pressed("jump") and !in_root_state:
             snap = Vector3.ZERO
             velocity.y = JUMP_SPEED
             is_fast_falling = false
