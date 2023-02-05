@@ -56,6 +56,8 @@ const DEFAULT_DAMAGE = 1.0  # Damage from basic enemy touch
 onready var bullet_spawner = $Head/BulletSpawner
 onready var original_head_y = $Head.translation.y
 
+var pool: Pool
+
 func _ready():
     Session.player = self
     
@@ -226,8 +228,9 @@ func process_firing(delta: float):
     if !_can_fire():
         return
 
-    if Input.is_action_just_pressed("fire"):
+    if Input.is_action_just_pressed("fire") and get_is_near_hydrated_pool():
         bullet_spawner.spawn_bullet()
+        pool.consume_water(Pool.SMALL_SHOT_WATER_AMOUNT)
 
 func _can_fire():
     return is_rooted
@@ -276,3 +279,20 @@ func die():
     
     #var level = get_tree().get_nodes_in_group("level")[0]
     #level.begin_reset_transition()
+
+func set_is_near_pool(is_near_pool: bool, pool: Pool) -> void:
+    var was_near_hydrated_pool := get_is_near_hydrated_pool()
+    if is_near_pool:
+        self.pool = pool
+    else:
+        if self.pool == pool:
+            self.pool = null
+    if get_is_near_hydrated_pool() != was_near_hydrated_pool:
+        on_is_near_hydrated_pool_changed()
+
+func get_is_near_hydrated_pool() -> bool:
+    return is_instance_valid(pool) and pool.is_hydrated
+
+func on_is_near_hydrated_pool_changed() -> void:
+    # TODO: Update UI?
+    pass

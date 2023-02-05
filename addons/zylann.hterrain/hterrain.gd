@@ -1,5 +1,5 @@
 tool
-class_name HTerrain
+class_name Terrain
 extends Spatial
 
 const HT_NativeFactory = preload("./native/factory.gd")

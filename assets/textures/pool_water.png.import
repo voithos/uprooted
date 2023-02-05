@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/ocean.png-3705f7ea5b4f27b40212ab4a541647b2.s3tc.stex"
-path.etc2="res://.import/ocean.png-3705f7ea5b4f27b40212ab4a541647b2.etc2.stex"
+path.s3tc="res://.import/pool_water.png-3fa0f2deb9d15be9f58ce4fedb696799.s3tc.stex"
+path.etc2="res://.import/pool_water.png-3fa0f2deb9d15be9f58ce4fedb696799.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/ocean.png"
-dest_files=[ "res://.import/ocean.png-3705f7ea5b4f27b40212ab4a541647b2.s3tc.stex", "res://.import/ocean.png-3705f7ea5b4f27b40212ab4a541647b2.etc2.stex" ]
+source_file="res://assets/textures/pool_water.png"
+dest_files=[ "res://.import/pool_water.png-3fa0f2deb9d15be9f58ce4fedb696799.s3tc.stex", "res://.import/pool_water.png-3fa0f2deb9d15be9f58ce4fedb696799.etc2.stex" ]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
-flags/filter=false
+flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=1

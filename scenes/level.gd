@@ -4,7 +4,7 @@ extends Spatial
 
 var is_ready := false
 var map: RID
-var terrain: HTerrain
+var terrain: Terrain
 var pool_manager: PoolManager
 var enemy_manager: EnemyManager
 

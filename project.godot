@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/enemy_manager.gd"
 }, {
-"base": "Spatial",
-"class": "HTerrain",
-"language": "GDScript",
-"path": "res://addons/zylann.hterrain/hterrain.gd"
-}, {
 "base": "Resource",
 "class": "HTerrainData",
 "language": "GDScript",
@@ -63,11 +58,15 @@ _global_script_classes=[ {
 "class": "ShakeableCamera",
 "language": "GDScript",
 "path": "res://scenes/ShakeableCamera.gd"
+}, {
+"base": "Spatial",
+"class": "Terrain",
+"language": "GDScript",
+"path": "res://addons/zylann.hterrain/hterrain.gd"
 } ]
 _global_script_class_icons={
 "Enemy": "",
 "EnemyManager": "",
-"HTerrain": "",
 "HTerrainData": "",
 "HTerrainDataLoader": "",
 "HTerrainDataSaver": "",
@@ -75,7 +74,8 @@ _global_script_class_icons={
 "Player": "",
 "Pool": "",
 "PoolManager": "",
-"ShakeableCamera": ""
+"ShakeableCamera": "",
+"Terrain": ""
 }
 
 [application]

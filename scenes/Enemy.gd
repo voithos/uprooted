@@ -99,7 +99,7 @@ func travel_along_path(delta: float) -> void:
 
 
 func navigate() -> void:
-    if not Session.level:
+    if Session.is_level_ready or !is_instance_valid(Session.player):
         # Demo level ?
         return
 

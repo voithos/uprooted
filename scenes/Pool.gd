@@ -2,17 +2,22 @@ class_name Pool
 extends Spatial
 
 
+const DOES_CONSUMING_WATER_DRAIN_POOL := false
+
 const DEFAULT_MAX_WATER_LEVEL := 27.0
-const DEFAULT_MIN_REHYDRATION_PERIOD := 60.0
-const DEFAULT_MAX_REHYDRATION_PERIOD := 240.0
+const DEFAULT_MIN_REHYDRATION_DELAY := 60.0
+const DEFAULT_MAX_REHYDRATION_DELAY := 240.0
 
 const SMALL_SHOT_WATER_AMOUNT := 1.0
 const MEDIUM_SHOT_WATER_AMOUNT := 3.0
 const LARGE_SHOT_WATER_AMOUNT := 9.0
 
-var max_water_level := DEFAULT_MAX_WATER_LEVEL
-var min_rehydration_period := DEFAULT_MIN_REHYDRATION_PERIOD
-var max_rehydration_period := DEFAULT_MAX_REHYDRATION_PERIOD
+const _BASE_SCALE := 5.0
+
+export var max_water_level := DEFAULT_MAX_WATER_LEVEL
+export var min_rehydration_delay := DEFAULT_MIN_REHYDRATION_DELAY
+export var max_rehydration_delay := DEFAULT_MAX_REHYDRATION_DELAY
+export var horizontal_scale := 1.0
 
 var is_hydrated := false
 var last_hydration_time := -1.0
@@ -26,9 +31,15 @@ func _ready() -> void:
     timer = Timer.new()
     timer.one_shot = true
     timer.autostart = false
-    timer.wait_time = min_rehydration_period
+    timer.wait_time = min_rehydration_delay
     timer.connect("timeout", self, "_rehydrate")
     add_child(timer)
+    
+    var scale_value := _BASE_SCALE * horizontal_scale
+    $Spatial.scale.x = scale_value
+    $Spatial.scale.z = scale_value
+    
+    $Area/CollisionShape.shape.radius = scale_value
     
     call_deferred("_sanitize_position")
 
@@ -56,7 +67,7 @@ func _sanitize_position() -> void:
 #    global_translation = \
 #        Session.level.terrain.cell_raycast(from, direction, max_distance)
     
-    var terrain := Session.level.terrain
+    var terrain: Terrain = Session.level.terrain
     var heightmap_cell_position: Vector3 = terrain.world_to_map(from)
 #    var heightmap_image: Image = terrain._data.get_image(HTerrainData.CHANNEL_HEIGHT)
 #    var height: float = terrain._get_height_or_default(image, heightmap_cell_position.x, heightmap_cell_position.z)
@@ -72,6 +83,10 @@ func _rehydrate() -> void:
 func set_is_hydrated(is_hydrated: bool) -> void:
     self.is_hydrated = is_hydrated
     timer.stop()
+    
+    var was_player_near_hydrated_pool: bool = \
+        Session.player.get_is_near_hydrated_pool()
+    
     if is_hydrated:
         last_hydration_time = OS.get_ticks_msec()
         water_level = max_water_level
@@ -83,12 +98,26 @@ func set_is_hydrated(is_hydrated: bool) -> void:
         Session.level.pool_manager.dehydrated_pools[self] = true
         Session.level.pool_manager.hydrated_pools.erase(self)
         timer.wait_time = \
-            rand_range(min_rehydration_period, max_rehydration_period)
+            rand_range(min_rehydration_delay, max_rehydration_delay)
         timer.start()
+    
+    if Session.player.get_is_near_hydrated_pool() != \
+            was_player_near_hydrated_pool:
+        Session.player.on_is_near_hydrated_pool_changed()
 
 
 func consume_water(amount: float) -> void:
     water_level -= amount
-    if water_level <= 0.0:
+    if water_level <= 0.0 and DOES_CONSUMING_WATER_DRAIN_POOL:
         set_is_hydrated(false)
         Session.pools_drained += 1
+
+
+func _on_Area_body_entered(body):
+    if body == Session.player:
+        Session.player.set_is_near_pool(true, self)
+
+
+func _on_Area_body_exited(body):
+    if body == Session.player:
+        Session.player.set_is_near_pool(false, self)
