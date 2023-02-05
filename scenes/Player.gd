@@ -228,12 +228,12 @@ func process_firing(delta: float):
     if !_can_fire():
         return
 
-    if Input.is_action_just_pressed("fire") and get_is_near_hydrated_pool():
+    if Input.is_action_just_pressed("fire"):
         bullet_spawner.spawn_bullet()
         pool.consume_water(Pool.SMALL_SHOT_WATER_AMOUNT)
 
 func _can_fire():
-    return is_rooted
+    return is_rooted and get_is_near_hydrated_pool()
 
 func _take_damage(damage):
     if is_invulnerable:
