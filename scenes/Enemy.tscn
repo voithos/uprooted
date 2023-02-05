@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/chainsaw.glb" type="PackedScene" id=2]
@@ -17,6 +17,40 @@ height = 0.002
 [sub_resource type="CapsuleShape" id=3]
 radius = 1.05
 height = 1.05
+
+[sub_resource type="Shader" id=8]
+code = "shader_type spatial;
+render_mode async_visible,blend_mix,depth_draw_opaque,cull_back,diffuse_lambert,specular_disabled,unshaded;
+
+uniform vec4 albedoFrom : hint_color;
+uniform vec4 albedoTo : hint_color;
+uniform vec4 albedoBG : hint_color;
+
+uniform float progress;
+
+void vertex() {
+    UV = UV;
+    // Billboard the mesh.
+    MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(CAMERA_MATRIX[0], CAMERA_MATRIX[1], CAMERA_MATRIX[2], WORLD_MATRIX[3]);
+}
+
+void fragment() {
+    vec2 base_uv = UV;
+    float pr = smoothstep(0.0 + progress, 0.0 + progress + 0.01, UV.x);
+    ALBEDO = mix(mix(albedoFrom.rgb, albedoTo.rgb, progress), albedoBG.rgb, pr);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 8 )
+shader_param/albedoFrom = Color( 1, 0, 0, 1 )
+shader_param/albedoTo = Color( 0.266667, 1, 0, 1 )
+shader_param/albedoBG = Color( 0.0627451, 0.0509804, 0.168627, 1 )
+shader_param/progress = 0.0
+
+[sub_resource type="QuadMesh" id=10]
+material = SubResource( 9 )
+size = Vector2( 1.6, 0.2 )
 
 [node name="Enemy" type="KinematicBody"]
 collision_layer = 9
@@ -55,5 +89,6 @@ transform = Transform( 1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0.9993
 shape = SubResource( 3 )
 
 [node name="BillboardHealthBar" parent="." instance=ExtResource( 4 )]
+mesh = SubResource( 10 )
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]

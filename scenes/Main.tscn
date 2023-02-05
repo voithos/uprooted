@@ -14,10 +14,12 @@ environment = ExtResource( 4 )
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1106.0
-margin_bottom = 843.0
+margin_right = 1782.0
+margin_bottom = 1218.0
 
 [node name="MainMenu" parent="." instance=ExtResource( 1 )]
 modulate = Color( 1, 1, 1, 0 )
 
 [node name="Hud" parent="." instance=ExtResource( 2 )]
+margin_right = 502.0
+margin_bottom = 498.0
