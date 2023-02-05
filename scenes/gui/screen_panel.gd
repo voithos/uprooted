@@ -11,7 +11,7 @@ const SCREEN_FADE_IN_DURATION := 0.3
 const SCREEN_FADE_OUT_DURATION := 0.4
 
 var is_open := false
-var can_start_new_level := false
+var can_start_new_level := true
 var press_any_key_tween: Tween
 var screen_fade_tween: Tween
 
