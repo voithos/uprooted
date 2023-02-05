@@ -167,6 +167,7 @@ draw_pass_1 = SubResource( 16 )
 
 [node name="BillboardHealthBar" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4.16786, 0 )
+cast_shadow = 0
 mesh = SubResource( 21 )
 full_color = Color( 0.109804, 0.584314, 1, 1 )
 empty_color = Color( 0.878431, 0.768627, 0.403922, 1 )

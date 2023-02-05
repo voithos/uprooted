@@ -32,11 +32,12 @@ shader_param/albedoTo = Color( 0.266667, 1, 0, 1 )
 shader_param/albedoBG = Color( 0.0627451, 0.0509804, 0.168627, 1 )
 shader_param/progress = 0.0
 
-[sub_resource type="QuadMesh" id=7]
+[sub_resource type="QuadMesh" id=10]
 material = SubResource( 9 )
 size = Vector2( 1.6, 0.2 )
 
 [node name="BillboardHealthBar" type="MeshInstance"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.2925, 0 )
-mesh = SubResource( 7 )
+cast_shadow = 0
+mesh = SubResource( 10 )
 script = ExtResource( 1 )
