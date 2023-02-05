@@ -366,10 +366,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -51.6266, 18.0711, -151.509 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 90.5483, 17.3325, 14.987 )
 
 [node name="Position3D2" type="Position3D" parent="EnemySpawnPositions"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 74.233, 16.7543, -103.48 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 55.833, 16.7543, -116.48 )
 
 [node name="Position3D3" type="Position3D" parent="EnemySpawnPositions"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -103.389, 5.64323, -21.6444 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -64.389, 5.64323, -56.5444 )
+
+[node name="Position3D4" type="Position3D" parent="EnemySpawnPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -47.4517, 17.3325, 93.287 )
+
+[node name="Position3D5" type="Position3D" parent="EnemySpawnPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -166.052, 17.3325, -103.613 )
+
+[node name="Position3D6" type="Position3D" parent="EnemySpawnPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -188.252, 17.3325, 36.187 )
+
+[node name="Position3D7" type="Position3D" parent="EnemySpawnPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -76.3517, 17.3325, 179.187 )
+
+[node name="Position3D8" type="Position3D" parent="EnemySpawnPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71.2483, 17.3325, 183.187 )
+
+[node name="Position3D9" type="Position3D" parent="EnemySpawnPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 210.148, 17.3325, -76.313 )
+
+[node name="Position3D10" type="Position3D" parent="EnemySpawnPositions"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 185.648, 17.3325, 100.887 )
 
 [node name="GrassMultiMesh" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0 )
