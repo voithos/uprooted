@@ -113,7 +113,7 @@ gradient = SubResource( 20 )
 [sub_resource type="NoiseTexture" id=23]
 noise = SubResource( 22 )
 
-[sub_resource type="ShaderMaterial" id=24]
+[sub_resource type="ShaderMaterial" id=26]
 shader = SubResource( 17 )
 shader_param/flow_speed = 0.3
 shader_param/vignette_size = 0.25
@@ -128,7 +128,7 @@ shader_param/color_gradient = SubResource( 21 )
 shader_param/distort_noise = SubResource( 23 )
 
 [sub_resource type="PlaneMesh" id=1]
-material = SubResource( 24 )
+material = SubResource( 26 )
 size = Vector2( 1.95, 1.95 )
 
 [sub_resource type="SpatialMaterial" id=6]
@@ -222,15 +222,15 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id=26]
+[sub_resource type="ShaderMaterial" id=27]
 shader = SubResource( 8 )
 shader_param/albedoFrom = Color( 0.878431, 0.768627, 0.403922, 1 )
 shader_param/albedoTo = Color( 0.109804, 0.584314, 1, 1 )
 shader_param/albedoBG = Color( 0.0627451, 0.0509804, 0.168627, 1 )
 shader_param/progress = nan
 
-[sub_resource type="QuadMesh" id=27]
-material = SubResource( 26 )
+[sub_resource type="QuadMesh" id=28]
+material = SubResource( 27 )
 size = Vector2( 1.6, 0.2 )
 
 [node name="Pool" type="Spatial"]
@@ -277,7 +277,7 @@ draw_pass_1 = SubResource( 16 )
 
 [node name="BillboardHealthBar" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 4.16786, 0 )
-mesh = SubResource( 27 )
+mesh = SubResource( 28 )
 full_color = Color( 0.109804, 0.584314, 1, 1 )
 empty_color = Color( 0.878431, 0.768627, 0.403922, 1 )
 

@@ -330,37 +330,59 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -57.6, 22.0875, -99.4 )
 
 [node name="Pool2" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -128.245, 9.9692, 71.1402 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool10" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.045, 15.8692, 160.34 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool11" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 37.055, 21.7692, 86.2402 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool4" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 172.455, 10.6692, 3.4402 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool5" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 123.955, 7.4692, -98.7598 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool12" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 24.655, 10.8692, -58.6598 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool6" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -35.845, 6.0692, 15.6402 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool7" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 128.955, 13.6692, 144.14 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool8" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -151.945, 33.1692, 124.84 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 keep_encoded_height = true
 
 [node name="Pool9" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -138.945, 13.7692, -33.2598 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="Pool3" parent="Pools" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -51.6266, 18.0711, -151.509 )
+min_dehydration_delay = 10.0
+max_dehydration_delay = 30.0
 
 [node name="EnemySpawnPositions" type="Spatial" parent="."]
 
