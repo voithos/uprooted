@@ -12,11 +12,13 @@ const MOSTLY_MUTED_DB = -36.0
 enum {
     EXAMPLE,
     GAMEPLAY,
+    MAINMENU,
 }
 
 const SAMPLES = {
     EXAMPLE: preload("res://assets/music/example.mp3"),
     GAMEPLAY: preload("res://assets/music/JungleEdge.mp3"),
+    MAINMENU: preload("res://assets/music/JungleB.mp3"),
 }
 # =======================
 

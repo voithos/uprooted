@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/JungleB.mp3-ff76e9ae788c6b5f49831865585c9f5d.mp3str"
+
+[deps]
+
+source_file="res://assets/music/JungleB.mp3"
+dest_files=[ "res://.import/JungleB.mp3-ff76e9ae788c6b5f49831865585c9f5d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
