@@ -49,6 +49,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/Player.gd"
 }, {
+"base": "Spatial",
+"class": "Pool",
+"language": "GDScript",
+"path": "res://scenes/Pool.gd"
+}, {
+"base": "Node",
+"class": "PoolManager",
+"language": "GDScript",
+"path": "res://scripts/pool_manager.gd"
+}, {
 "base": "Camera",
 "class": "ShakeableCamera",
 "language": "GDScript",
@@ -63,6 +73,8 @@ _global_script_class_icons={
 "HTerrainDataSaver": "",
 "Level": "",
 "Player": "",
+"Pool": "",
+"PoolManager": "",
 "ShakeableCamera": ""
 }
 
