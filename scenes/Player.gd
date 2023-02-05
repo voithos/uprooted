@@ -31,7 +31,15 @@ var snap := Vector3()
 var previous_position := Vector3.INF
 var previous_ground_position := Vector3.INF
 
+const ROOT_DURATION := 0.8
+const UNROOT_DURATION := 0.4
+var rooting_tween: SceneTreeTween
+
 # Ye olde terrible boolean state machine
+var is_rooted := false
+var is_rooting := false
+var is_unrooting := false
+
 var is_airborne := false
 var was_airborne := false
 var is_fast_falling := false
@@ -46,6 +54,7 @@ var invulnerability_timer := 0.0
 const DEFAULT_DAMAGE = 1.0  # Damage from basic enemy touch
 
 onready var bullet_spawner = $Head/BulletSpawner
+onready var original_head_y = $Head.translation.y
 
 func _ready():
     Session.player = self
@@ -61,6 +70,7 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
     process_movement(delta)
+    process_rooting(delta)
     process_firing(delta)
     
     _update_invulnerability(delta)
@@ -70,6 +80,44 @@ func _physics_process(delta: float) -> void:
             Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
         else:
             Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func process_rooting(delta: float) -> void:
+    if Input.is_action_just_pressed("root"):
+        if !is_rooted and _can_root():
+            _begin_rooting()
+        elif !is_unrooting:
+            # Can always unroot
+            _begin_unrooting()
+
+func _is_in_root_state():
+    return is_rooted or is_rooting or is_unrooting
+
+func _can_root():
+    # TODO: Add more root requirements here
+    return !is_airborne and !is_rooting
+
+func _begin_rooting():
+    is_rooting = true
+    rooting_tween = get_tree().create_tween()
+    rooting_tween.tween_property($Head, "translation:y", 0.0, ROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+    yield(rooting_tween, "finished")
+    is_rooted = true
+    is_rooting = false
+    rooting_tween = null
+
+func _begin_unrooting():
+    is_unrooting = true
+    # Immediately disengage
+    is_rooted = false
+    # In case we need to override
+    if rooting_tween:
+        rooting_tween.stop()
+    is_rooting = false
+    var tween = get_tree().create_tween()
+    tween.tween_property($Head, "translation:y", original_head_y, UNROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+    yield(tween, "finished")
+    
+    is_unrooting = false
 
 func process_movement(delta: float) -> void:
     var input_axis = Input.get_vector(
@@ -83,6 +131,9 @@ func process_movement(delta: float) -> void:
     var aim: Basis = get_global_transform().basis
     # Convert input to 3D direction vector.
     direction = aim.z * -input_axis.x + aim.x * input_axis.y
+    
+    if _is_in_root_state():
+        direction = Vector3()
     
     if is_on_floor():
         is_airborne = false
@@ -169,8 +220,14 @@ func get_foot_position() -> Vector3:
 
 func process_firing(delta: float):
     # TODO: make this auto-fire
+    if !_can_fire():
+        return
+
     if Input.is_action_just_pressed("fire"):
         bullet_spawner.spawn_bullet()
+
+func _can_fire():
+    return is_rooted
 
 func _take_damage(damage):
     if is_invulnerable:
