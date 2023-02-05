@@ -160,11 +160,11 @@ root={
 
 [layer_names]
 
-3d_physics/layer_1="world"
-3d_physics/layer_2="enemy"
-3d_physics/layer_3="player"
-3d_physics/layer_4="enemy_projectile"
-3d_physics/layer_5="player_projectile"
+3d_physics/layer_1="collides_with_world"
+3d_physics/layer_2="hurts_enemy"
+3d_physics/layer_3="hurts_player"
+3d_physics/layer_4="is_enemy"
+3d_physics/layer_5="is_player"
 3d_physics/layer_6="pool"
 3d_physics/layer_7="sunlight"
 

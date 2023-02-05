@@ -41,7 +41,7 @@ skeleton = NodePath("../..")
 
 [node name="Area" type="Area" parent="."]
 collision_layer = 32
-collision_mask = 4
+collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
