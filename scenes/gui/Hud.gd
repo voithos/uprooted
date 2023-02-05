@@ -45,12 +45,17 @@ func _process(delta: float) -> void:
     if !is_instance_valid(Session.player):
         return
     
+    var wave_cooldown_progress := get_node("%WaveCooldownProgress")
+    var wave_cooldown_background := get_node("%WaveCooldownBackground")
+    wave_cooldown_progress.rect_min_size.x = \
+        Session.level.enemy_manager.get_wave_cooldown_progress() * \
+        wave_cooldown_background.rect_size.x
+    
     if Session.player.get_is_rooted_near_pool():
         var color := Session.player.pool.get_progress_bar_color()
         var hydration_progress := get_node("%HydrationProgress")
         var hydration_background := get_node("%HydrationBackground")
         hydration_progress.color = color
-        
         hydration_progress.rect_min_size.x = \
             Session.player.pool.get_hydration_progress() * \
             hydration_background.rect_size.x

@@ -168,6 +168,10 @@ func _find_safe_spawn_height(
         SPAWN_HEIGHT_OFFSET
 
 
+func get_wave_cooldown_progress() -> float:
+    return timer.time_left / timer.wait_time
+
+
 func on_enemy_destroyed(enemy: Enemy) -> void:
     enemies.erase(enemy)
     enemy.queue_free()
