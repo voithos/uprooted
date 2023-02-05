@@ -294,6 +294,7 @@ func _check_for_hitboxes():
 func set_health(h):
     health = min(max(0, h), MAX_HEALTH)
     emit_signal("health_changed", health, MAX_HEALTH)
+    Session.update_health(health)
     if health <= 0:
         die()
 

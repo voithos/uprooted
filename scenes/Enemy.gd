@@ -2,6 +2,19 @@ class_name Enemy
 extends KinematicBody
 
 
+enum {
+    UNKNOWN,
+    SMALL,
+    MEDIUM,
+    LARGE,
+}
+
+const SCORES := {
+    SMALL: 100,
+    MEDIUM: 300,
+    LARGE: 900,
+}
+
 const NAVIGATION_INTERVAL := 1.0
 const OPTIMIZE_PATH := true
 const TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED := 0.7
@@ -19,6 +32,8 @@ var velocity := Vector3.ZERO
 export (float) var max_health = 3.0
 onready var health = max_health
 
+export var type := SMALL
+
 
 func _ready():
     set_up_timer()
@@ -32,6 +47,7 @@ func take_damage():
     set_health(health - DAMAGE_TAKEN)
 
 func die():
+    Session.add_score(SCORES[type])
     queue_free()
 
 func set_up_timer() -> void:

@@ -42,3 +42,4 @@ func _on_ready() -> void:
     # initialized.
     is_ready = true
     pool_manager.on_player_ready()
+    Screen.get_hud().update_health(true, true)

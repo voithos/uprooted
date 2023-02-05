@@ -1,16 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/gui/MainMenuScreen.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/gui/Hud.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/gui/GameOverScreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Environment.tres" type="Environment" id=4]
 
 [node name="Main" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 4 )
 
 [node name="GameOverScreen" parent="." instance=ExtResource( 3 )]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 1200.0
+margin_right = 1089.0
 margin_bottom = 843.0
 
 [node name="MainMenu" parent="." instance=ExtResource( 1 )]
 modulate = Color( 1, 1, 1, 0 )
+
+[node name="Hud" parent="." instance=ExtResource( 2 )]

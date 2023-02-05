@@ -12,6 +12,7 @@ shadow_size = 2
 
 [resource]
 default_font = ExtResource( 1 )
+HBoxContainer/constants/separation = 0
 Label/colors/font_color = Color( 0.827451, 0.960784, 0.878431, 1 )
 Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 Label/colors/font_outline_modulate = Color( 0, 0, 0, 1 )
@@ -29,3 +30,4 @@ LinkButton/constants/underline_spacing = 3
 LinkButton/fonts/font = ExtResource( 1 )
 LinkButton/styles/focus = null
 PanelContainer/styles/panel = SubResource( 1 )
+VBoxContainer/constants/separation = 0

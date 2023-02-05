@@ -98,7 +98,8 @@ func _spawn_next_wave() -> void:
     for i in range(large_count):
         _spawn_enemy(LARGE_ENEMY_SCENE)
     
-    Session.waves_completed = wave_index
+    Session.set_waves_completed(wave_index)
+    Session.add_score(_get_wave_score())
     
     wave_index += 1
 
@@ -114,6 +115,13 @@ func _get_enemy_count(
     if is_heavy_wave:
         base *= HEAVY_WAVE_MULTIPLIER
     return int(count_basis * pow(base, WAVE_COUNT_EXPONENT))
+
+
+const WAVE_SCORE_BASIS := 50.0
+
+
+func _get_wave_score() -> int:
+    return int(WAVE_SCORE_BASIS * pow(wave_index, WAVE_COUNT_EXPONENT))
 
 
 func _spawn_enemy(enemy_scene: PackedScene) -> void:

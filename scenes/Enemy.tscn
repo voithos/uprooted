@@ -14,8 +14,8 @@ height = 0.002
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=3]
-radius = 1.07997
-height = 1.81443
+radius = 1.05
+height = 1.05
 
 [node name="Enemy" type="KinematicBody"]
 collision_layer = 9

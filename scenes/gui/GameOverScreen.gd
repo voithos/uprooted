@@ -16,7 +16,9 @@ func set_is_open(value: bool, fades := true) -> void:
     .set_is_open(value, fades)
     get_node("%Header").text = _get_game_over_message()
     get_node("%Score").text = str(Session.score)
-    get_node("%WaveCount").text = str(Session.waves_completed)
+    get_node("%WaveCount").text = str(Session.waves_completed + 1)
+    if is_open:
+        Screen.get_hud().set_is_shown(false)
 
 
 func _on_resized() -> void:

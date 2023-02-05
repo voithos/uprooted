@@ -107,8 +107,9 @@ func _on_resized() -> void:
 
 func _start_new_level() -> void:
     Session.reset()
+    Screen.get_hud().set_is_shown(true)
     var level := LEVEL_SCENE.instance()
     var main_node := self.owner
     main_node.add_child(level)
-    main_node.move_child(level, 0)
+    main_node.move_child(level, 1)
     set_is_open(false)

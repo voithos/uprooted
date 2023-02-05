@@ -38,3 +38,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func show_game_over_screen() -> void:
     get_node("/root/Main/GameOverScreen").set_is_open(true)
+
+
+func get_hud() -> Node:
+    return get_node("/root/Main/Hud")
