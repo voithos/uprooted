@@ -29,12 +29,14 @@ const HALF_WIDTH := {
 
 const NAVIGATION_INTERVAL := 1.0
 const OPTIMIZE_PATH := true
-const TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED := 0.7
-const TRAVEL_SPEED := TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED * Player.MAX_SPEED
+const TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED := 0.75
+const TRAVEL_SPEED_RANDOM_SLOWDOWN_RATIO := 0.18
+const TRAVEL_DIRECTION_RANDOM_DEVIATION_MAX := PI / 15
 const MAX_SLOPE_ANGLE := deg2rad(50.0)
 const STOP_ON_SLOPES := true
 const DAMAGE_TAKEN := 1.0
 
+var travel_speed: float
 var timer: Timer
 var path: PoolVector3Array
 var path_index := 0
@@ -48,6 +50,10 @@ export var type := SMALL
 
 
 func _ready():
+    travel_speed = \
+        TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED * Player.MAX_SPEED * \
+        (1.0 - randf() * TRAVEL_SPEED_RANDOM_SLOWDOWN_RATIO)
+    
     set_up_timer()
     set_health(max_health)
 
@@ -97,27 +103,32 @@ func _physics_process(delta: float):
 
 
 func travel_along_path(delta: float) -> void:
-    var travel_distance := delta * TRAVEL_SPEED
+    var travel_distance := delta * travel_speed
     var target := path[path_index]
     var displacement_to_target := target - global_translation
     displacement_to_target.y = 0
     var is_displacement_negligible := \
         displacement_to_target.length_squared() < 0.001
     var travel_direction := \
-        Vector3.UP if \
+        Vector3.BACK if \
         is_displacement_negligible else \
         displacement_to_target.normalized()
     
-    var travel_displacement: Vector3
     if travel_distance * travel_distance > \
             displacement_to_target.length_squared():
         # Move directly to the target, and don't overshoot it.
-        travel_displacement = displacement_to_target
         path_index += 1
         
         # TODO: Include movement along the next path segment for the remainder
         #       of travel distance.
     else:
+        # Add random deviation to the travel direction to help enemies clump
+        # less and look more realistic.
+        var rotation := randf() * TRAVEL_DIRECTION_RANDOM_DEVIATION_MAX
+        if randf() < 0.5:
+            rotation *= -1
+        travel_direction.rotated(Vector3.UP, rotation)
+            
         displacement_to_target = travel_direction * travel_distance
     
     var travel_velocity := displacement_to_target / delta
