@@ -12,6 +12,10 @@ const GAME_OVER_MESSAGES := [
 ]
 
 
+func _ready() -> void:
+    includes_delay_for_starting_new_level = true
+
+
 func set_is_open(value: bool, fades := true) -> void:
     .set_is_open(value, fades)
     get_node("%Header").text = _get_game_over_message()

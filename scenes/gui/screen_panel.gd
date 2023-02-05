@@ -11,6 +11,8 @@ const SCREEN_FADE_IN_DURATION := 0.3
 const SCREEN_FADE_OUT_DURATION := 0.4
 
 var is_open := false
+var includes_delay_for_starting_new_level := false
+var has_delay_elapsed := false
 var press_any_key_tween: Tween
 var screen_fade_tween: Tween
 
@@ -34,9 +36,11 @@ func _ready() -> void:
 
 
 func _input(event):
-    if (event is InputEventKey or \
+    if is_open and \
+            (event is InputEventKey or \
             event is InputEventMouseButton) and \
-            event.is_pressed():
+            event.is_pressed() and \
+            (!includes_delay_for_starting_new_level or has_delay_elapsed):
         _start_new_level()
 
 
@@ -45,6 +49,8 @@ func set_is_open(value: bool, fades := true) -> void:
     
     press_any_key_tween.stop_all()
     screen_fade_tween.stop_all()
+    
+    has_delay_elapsed = false
     
     if is_open:
         get_node("%PressAnyKey").modulate.a = 0.0
@@ -90,7 +96,7 @@ func set_is_open(value: bool, fades := true) -> void:
 
 
 func _on_press_any_key_tween_completed(object: Object, key: NodePath) -> void:
-    pass
+    has_delay_elapsed = true
 
 
 func _on_screen_fade_tween_completed(object: Object, key: NodePath) -> void:
