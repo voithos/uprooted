@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=2]
@@ -34,8 +34,86 @@ textures = [ [ ExtResource( 5 ) ], [ ExtResource( 6 ) ] ]
 [sub_resource type="CubeMesh" id=7]
 size = Vector3( 24, 8, 8 )
 
-[sub_resource type="CubeMesh" id=8]
-size = Vector3( 32, 1, 32 )
+[sub_resource type="CubeMesh" id=23]
+size = Vector3( 8, 30, 8 )
+
+[sub_resource type="CubeMesh" id=24]
+size = Vector3( 8, 30, 8 )
+
+[sub_resource type="CubeMesh" id=25]
+size = Vector3( 8, 30, 8 )
+
+[sub_resource type="CubeMesh" id=10]
+size = Vector3( 48, 8, 8 )
+
+[sub_resource type="CubeMesh" id=11]
+size = Vector3( 30, 8, 8 )
+
+[sub_resource type="CubeMesh" id=9]
+size = Vector3( 1, 30, 60 )
+
+[sub_resource type="CubeMesh" id=12]
+size = Vector3( 1, 30, 60 )
+
+[sub_resource type="CubeMesh" id=13]
+size = Vector3( 1, 30, 60 )
+
+[sub_resource type="CubeMesh" id=14]
+size = Vector3( 1, 15, 60 )
+
+[sub_resource type="CubeMesh" id=15]
+size = Vector3( 1, 15, 20 )
+
+[sub_resource type="CubeMesh" id=16]
+size = Vector3( 1, 15, 20 )
+
+[sub_resource type="CubeMesh" id=17]
+size = Vector3( 1, 60, 30 )
+
+[sub_resource type="CubeMesh" id=18]
+size = Vector3( 1, 32.5, 30 )
+
+[sub_resource type="CubeMesh" id=19]
+size = Vector3( 8, 30, 8 )
+
+[sub_resource type="CubeMesh" id=22]
+size = Vector3( 8, 30, 8 )
+
+[sub_resource type="CubeMesh" id=26]
+size = Vector3( 8, 2, 8 )
+
+[sub_resource type="CubeMesh" id=27]
+size = Vector3( 2, 6, 2 )
+
+[sub_resource type="CubeMesh" id=20]
+size = Vector3( 24, 4, 4 )
+
+[sub_resource type="CubeMesh" id=21]
+size = Vector3( 32, 3, 32 )
+
+[sub_resource type="CubeMesh" id=28]
+size = Vector3( 40, 10, 24 )
+
+[sub_resource type="CubeMesh" id=34]
+size = Vector3( 40, 10, 24 )
+
+[sub_resource type="CubeMesh" id=29]
+size = Vector3( 6, 30, 6 )
+
+[sub_resource type="CubeMesh" id=30]
+size = Vector3( 6, 30, 6 )
+
+[sub_resource type="CubeMesh" id=31]
+size = Vector3( 6, 30, 6 )
+
+[sub_resource type="CubeMesh" id=32]
+size = Vector3( 6, 30, 6 )
+
+[sub_resource type="CubeMesh" id=33]
+size = Vector3( 6, 30, 6 )
+
+[sub_resource type="CubeMesh" id=35]
+size = Vector3( 14, 8, 50 )
 
 [node name="MainLevel" type="Spatial"]
 script = ExtResource( 8 )
@@ -71,15 +149,175 @@ shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
 [node name="Boxes" type="Spatial" parent="SmallEnemyNavMesh"]
 
-[node name="Spatial" parent="SmallEnemyNavMesh/Boxes" instance=ExtResource( 10 )]
-transform = Transform( 0.926902, -0.375302, 0, 0.375302, 0.926902, 0, 0, 0, 1, 22.6343, 2.75502, 0 )
+[node name="Ramp" parent="SmallEnemyNavMesh/Boxes" instance=ExtResource( 10 )]
+transform = Transform( 0.710048, -0.287498, -0.642788, 0.375302, 0.926902, 0, 0.595801, -0.241239, 0.766044, 22.6343, 2.05502, 0 )
 mesh = SubResource( 7 )
 size = Vector3( 24, 8, 8 )
 
-[node name="Spatial2" parent="SmallEnemyNavMesh/Boxes" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 57.5144, 11.5083, 0 )
-mesh = SubResource( 8 )
-size = Vector3( 32, 1, 32 )
+[node name="Spatial3" type="Spatial" parent="SmallEnemyNavMesh/Boxes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0 )
+
+[node name="Box9" parent="SmallEnemyNavMesh/Boxes/Spatial3" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -84, -10.1, 19.6 )
+mesh = SubResource( 23 )
+skeleton = NodePath("../../Building")
+size = Vector3( 8, 30, 8 )
+
+[node name="Box10" parent="SmallEnemyNavMesh/Boxes/Spatial3" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -84, -9.2, 11.6 )
+mesh = SubResource( 24 )
+skeleton = NodePath("../../Building")
+size = Vector3( 8, 30, 8 )
+
+[node name="Box11" parent="SmallEnemyNavMesh/Boxes/Spatial3" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -76, -8.4, 11.6 )
+mesh = SubResource( 25 )
+skeleton = NodePath("../../Building")
+size = Vector3( 8, 30, 8 )
+
+[node name="Building" type="Spatial" parent="SmallEnemyNavMesh/Boxes"]
+transform = Transform( 0.766044, 0, -0.642788, 0, 1, 0, 0.642788, 0, 0.766044, 24.6, 0, 143.2 )
+
+[node name="Ramp" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( -4.05162e-08, 1.6405e-08, -1, 0.530555, 0.84765, -7.5904e-09, 0.84765, -0.530555, -4.30473e-08, -157.266, 4.95502, 121.8 )
+mesh = SubResource( 10 )
+skeleton = NodePath("../..")
+size = Vector3( 48, 8, 8 )
+
+[node name="Ramp2" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( 0.84765, -0.530555, -1.11759e-07, 0.530555, 0.84765, -7.5904e-09, 9.68575e-08, -5.21541e-08, 1, -144.766, 21.655, 143.9 )
+mesh = SubResource( 11 )
+skeleton = NodePath("../..")
+size = Vector3( 30, 8, 8 )
+
+[node name="Box" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -161.116, 18.0009, 118.243 )
+mesh = SubResource( 9 )
+size = Vector3( 1, 30, 60 )
+
+[node name="Box2" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -102.003, 18.0009, 118.243 )
+mesh = SubResource( 12 )
+size = Vector3( 1, 30, 60 )
+
+[node name="Box3" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -131.546, 18.0009, 147.801 )
+mesh = SubResource( 13 )
+size = Vector3( 1, 30, 60 )
+
+[node name="Box4" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -131.546, 25.5009, 88.5413 )
+mesh = SubResource( 14 )
+size = Vector3( 1, 15, 60 )
+
+[node name="Box5" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -111.546, 10.5009, 88.5413 )
+mesh = SubResource( 15 )
+size = Vector3( 1, 15, 20 )
+
+[node name="Box6" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -151.556, 10.5009, 88.5413 )
+mesh = SubResource( 16 )
+size = Vector3( 1, 15, 20 )
+
+[node name="Ceiling" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -131.593, 32.6009, 103.143 )
+mesh = SubResource( 17 )
+size = Vector3( 1, 60, 30 )
+
+[node name="Ceiling2" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -117.793, 32.6009, 133.143 )
+mesh = SubResource( 18 )
+size = Vector3( 1, 32.5, 30 )
+
+[node name="Box7" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -157.3, 6, 144.1 )
+mesh = SubResource( 19 )
+size = Vector3( 8, 30, 8 )
+
+[node name="Box8" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -133.1, -4.3, 120.4 )
+mesh = SubResource( 22 )
+size = Vector3( 8, 30, 8 )
+
+[node name="Box9" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( 0.965927, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965927, -113.183, 34.1, 103.688 )
+mesh = SubResource( 26 )
+size = Vector3( 8, 2, 8 )
+
+[node name="Box10" parent="SmallEnemyNavMesh/Boxes/Building" instance=ExtResource( 10 )]
+transform = Transform( 0.766046, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766046, -128.221, 36, 109.257 )
+mesh = SubResource( 27 )
+__meta__ = {
+"_edit_lock_": true
+}
+size = Vector3( 2, 6, 2 )
+
+[node name="Spatial" type="Spatial" parent="SmallEnemyNavMesh/Boxes"]
+transform = Transform( -0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, -0.906308, -54.6, 12.2, -35 )
+
+[node name="Ramp2" parent="SmallEnemyNavMesh/Boxes/Spatial" instance=ExtResource( 10 )]
+transform = Transform( 0.798183, -0.602414, 0, 0.602414, 0.798183, 0, 0, 0, 1, 71.8343, 13.455, 70.9 )
+mesh = SubResource( 20 )
+skeleton = NodePath("../..")
+size = Vector3( 24, 4, 4 )
+
+[node name="Spatial3" parent="SmallEnemyNavMesh/Boxes/Spatial" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 81.6144, 11.5083, 60 )
+mesh = SubResource( 21 )
+skeleton = NodePath("../..")
+size = Vector3( 32, 3, 32 )
+
+[node name="Box12" parent="SmallEnemyNavMesh/Boxes" instance=ExtResource( 10 )]
+transform = Transform( 0.620885, 0.258819, 0.739942, -0.030816, 0.951251, -0.306874, -0.783296, 0.167731, 0.598594, 134.1, 15.1, 53.6 )
+mesh = SubResource( 28 )
+skeleton = NodePath("../Building")
+size = Vector3( 40, 10, 24 )
+
+[node name="Box13" parent="SmallEnemyNavMesh/Boxes" instance=ExtResource( 10 )]
+transform = Transform( 0.620885, 0.258819, 0.739942, -0.030816, 0.951251, -0.306874, -0.783296, 0.167731, 0.598594, 134.1, 15.1, 53.6 )
+mesh = SubResource( 34 )
+skeleton = NodePath("../Building")
+size = Vector3( 40, 10, 24 )
+
+[node name="Spatial2" type="Spatial" parent="SmallEnemyNavMesh/Boxes"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4, 0 )
+
+[node name="Box13" parent="SmallEnemyNavMesh/Boxes/Spatial2" instance=ExtResource( 10 )]
+transform = Transform( 0.640342, 0.0871557, 0.763129, -0.0560226, 0.996195, -0.0667652, -0.766044, 0, 0.642788, 101.35, 27.2, 60.65 )
+mesh = SubResource( 29 )
+skeleton = NodePath("../../Building")
+size = Vector3( 6, 30, 6 )
+
+[node name="Box14" parent="SmallEnemyNavMesh/Boxes/Spatial2" instance=ExtResource( 10 )]
+transform = Transform( 0.640342, -0.0871557, 0.763129, 0.0560226, 0.996195, 0.0667652, -0.766044, 0, 0.642788, 109.8, 24.1, 51 )
+mesh = SubResource( 30 )
+skeleton = NodePath("../../Building")
+size = Vector3( 6, 30, 6 )
+
+[node name="Box15" parent="SmallEnemyNavMesh/Boxes/Spatial2" instance=ExtResource( 10 )]
+transform = Transform( 0.642788, 0, 0.766044, 0.0667652, 0.996195, -0.0560226, -0.763129, 0.0871557, 0.640342, 125.22, 28.9, 32.21 )
+mesh = SubResource( 31 )
+skeleton = NodePath("../../Building")
+size = Vector3( 6, 30, 6 )
+
+[node name="Box17" parent="SmallEnemyNavMesh/Boxes/Spatial2" instance=ExtResource( 10 )]
+transform = Transform( 0.642788, 0, 0.766044, -0.0667652, 0.996195, 0.0560226, -0.763129, -0.0871557, 0.640342, 117.54, 27.2, 41.52 )
+mesh = SubResource( 32 )
+skeleton = NodePath("../../Building")
+size = Vector3( 6, 30, 6 )
+
+[node name="Box16" parent="SmallEnemyNavMesh/Boxes/Spatial2" instance=ExtResource( 10 )]
+transform = Transform( 0.640342, -0.0871557, 0.763129, 0.122575, 0.992404, 0.0104885, -0.758247, 0.0868241, 0.646161, 132.9, 27.2, 23.39 )
+mesh = SubResource( 33 )
+skeleton = NodePath("../../Building")
+size = Vector3( 6, 30, 6 )
+
+[node name="Box14" parent="SmallEnemyNavMesh/Boxes" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 122.4, -3.3, -161.2 )
+mesh = SubResource( 35 )
+skeleton = NodePath("../Building")
+size = Vector3( 14, 8, 50 )
 
 [node name="Trees" type="Spatial" parent="SmallEnemyNavMesh"]
 
