@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/Pool.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/pool_water.png" type="Texture" id=2]
@@ -28,6 +28,14 @@ height = 1.0
 height = 3.0
 radius = 5.0
 
+[sub_resource type="Gradient" id=13]
+interpolation_mode = 2
+offsets = PoolRealArray( 0.477419, 0.903226 )
+colors = PoolColorArray( 0, 0.533333, 1, 1, 1, 1, 1, 1 )
+
+[sub_resource type="GradientTexture" id=14]
+gradient = SubResource( 13 )
+
 [sub_resource type="Curve" id=9]
 _data = [ Vector2( 0, 1 ), 0.0, -0.418135, 0, 0, Vector2( 1, 0.29955 ), -3.08687, 0.0, 0, 0 ]
 
@@ -46,7 +54,7 @@ trail_divisor = 3
 trail_size_modifier = SubResource( 12 )
 emission_shape = 5
 emission_ring_radius = 5.0
-emission_ring_inner_radius = 4.9
+emission_ring_inner_radius = 4.75
 emission_ring_height = 0.01
 emission_ring_axis = Vector3( 0, 1, 0 )
 flag_rotate_y = true
@@ -59,15 +67,15 @@ damping = 1.0
 angle = 134.5
 angle_random = 1.0
 scale_curve = SubResource( 10 )
+color_ramp = SubResource( 14 )
 
-[sub_resource type="SpatialMaterial" id=13]
-params_diffuse_mode = 4
-params_specular_mode = 4
-albedo_color = Color( 0, 0.533333, 1, 1 )
+[sub_resource type="SpatialMaterial" id=15]
+vertex_color_use_as_albedo = true
 
-[sub_resource type="CubeMesh" id=8]
-material = SubResource( 13 )
-size = Vector3( 0.5, 0.5, 0.5 )
+[sub_resource type="SphereMesh" id=16]
+material = SubResource( 15 )
+radius = 0.5
+height = 1.0
 
 [node name="Pool" type="Spatial"]
 script = ExtResource( 1 )
@@ -105,7 +113,7 @@ shape = SubResource( 5 )
 [node name="Particles" type="Particles" parent="."]
 amount = 24
 process_material = SubResource( 7 )
-draw_pass_1 = SubResource( 8 )
+draw_pass_1 = SubResource( 16 )
 
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
 [connection signal="body_exited" from="Area" to="." method="_on_Area_body_exited"]
