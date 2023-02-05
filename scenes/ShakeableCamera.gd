@@ -30,6 +30,9 @@ func _process(delta):
     
 func add_trauma(amt: float):
     trauma = clamp(trauma + amt, 0.0, 1.0)
+
+func set_min_trauma(amt: float):
+    trauma = clamp(max(trauma, amt), 0.0, 1.0)
     
 func get_shake_intensity() -> float:
     return trauma * trauma
