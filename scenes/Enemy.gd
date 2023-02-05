@@ -45,9 +45,14 @@ var velocity := Vector3.ZERO
 
 export (float) var max_health = 3.0
 onready var health = max_health
+export var can_shoot := false
+export var min_shoot_delay := 3.0 # Seconds
+export var shoot_probability_after_delay := 0.4 # Per second
+var shoot_timeout := min_shoot_delay
 
 export var type := SMALL
 
+var bullet_scene = preload("res://scenes/EnemyBullet.tscn")
 
 func _ready():
     travel_speed = \
@@ -83,6 +88,8 @@ func set_up_timer() -> void:
 func _physics_process(delta: float):
     if !Session.is_player_and_level_ready:
         return
+        
+    _handle_gunning(delta)
     
     # Handle moving platforms.
     var snap := -get_floor_normal() - get_floor_velocity() * delta
@@ -101,6 +108,25 @@ func _physics_process(delta: float):
     move_and_slide_with_snap(
         velocity, snap, Vector3.UP, STOP_ON_SLOPES, 4, MAX_SLOPE_ANGLE)
 
+func _handle_gunning(delta: float):
+    if !can_shoot:
+        return
+    
+    shoot_timeout -= delta
+    if shoot_timeout >= 0:
+        return
+    
+    if randf() > (shoot_probability_after_delay * delta):
+        return
+    
+    # Shoot
+    shoot_timeout = min_shoot_delay
+    var b = bullet_scene.instance()
+    var scene_root = get_tree().root.get_children()[0]
+    scene_root.add_child(b)
+
+    b.global_transform = $BulletSpawner.global_transform
+    b.look_at(Session.player.global_translation, Vector3.UP)
 
 func travel_along_path(delta: float) -> void:
     var travel_distance := delta * travel_speed

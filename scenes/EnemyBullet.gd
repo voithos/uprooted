@@ -1,7 +1,7 @@
 extends KinematicBody
 
-const BULLET_SPEED = 50
-var LIFETIME = 2.0
+const BULLET_SPEED = 10
+var LIFETIME = 5.0
 
 var age = 0.0
 var is_exploding = false
@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
             queue_free()
         return
 
-    var forward_dir = global_transform.basis.z.normalized()
+    var forward_dir = -global_transform.basis.z.normalized()
     
     var collision = move_and_collide(forward_dir * BULLET_SPEED * delta)
     if collision:
@@ -30,5 +30,5 @@ func explode():
         return
     
     is_exploding = true
-    $MeshInstance.hide()
+    $fireball_vfx.hide()
     $Particles.emit()

@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/EnemyBullet.gd" type="Script" id=1]
+[ext_resource path="res://assets/vfx/fireball_vfx.glb" type="PackedScene" id=2]
+[ext_resource path="res://scenes/BulletParticles.tscn" type="PackedScene" id=3]
+
+[sub_resource type="SphereShape" id=3]
+radius = 0.488074
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("fireball_vfx:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "spin"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("fireball_vfx:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -360, 0 ) ]
+}
+
+[node name="Bullet" type="KinematicBody"]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.96046e-08, 0 )
+shape = SubResource( 3 )
+
+[node name="fireball_vfx" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, -0.589878, 0 )
+
+[node name="Particles" parent="." instance=ExtResource( 3 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "spin"
+anims/RESET = SubResource( 4 )
+anims/spin = SubResource( 5 )

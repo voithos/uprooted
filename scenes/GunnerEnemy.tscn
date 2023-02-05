@@ -49,6 +49,8 @@ size = Vector2( 1.6, 0.2 )
 [node name="Enemy" type="KinematicBody"]
 collision_layer = 9
 script = ExtResource( 1 )
+TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED = 0.5
+can_shoot = true
 type = 2
 
 [node name="we" parent="." instance=ExtResource( 2 )]
@@ -69,5 +71,8 @@ shape = SubResource( 3 )
 [node name="BillboardHealthBar" parent="." instance=ExtResource( 4 )]
 visible = false
 mesh = SubResource( 10 )
+
+[node name="BulletSpawner" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.96378, 2.31011, -1.6999 )
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
