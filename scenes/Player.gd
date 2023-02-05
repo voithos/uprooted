@@ -110,12 +110,14 @@ func _begin_unrooting():
     # Immediately disengage
     is_rooted = false
     # In case we need to override
+    var duration := UNROOT_DURATION
     if rooting_tween:
+        duration *= rooting_tween.get_total_elapsed_time() / ROOT_DURATION
         rooting_tween.kill()
         rooting_tween = null
     is_rooting = false
     var tween = get_tree().create_tween()
-    tween.tween_property($Head, "translation:y", original_head_y, UNROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+    tween.tween_property($Head, "translation:y", original_head_y, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
     yield(tween, "finished")
     
     is_unrooting = false
