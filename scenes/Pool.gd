@@ -67,13 +67,15 @@ func _process(delta: float) -> void:
     if OS.get_ticks_msec() > _next_hydration_toggle_time:
         _toggle_hydration()
     
+    $BillboardHealthBar.set_progress(get_hydration_progress())
+
+
+func get_hydration_progress() -> float:
     var interval_progress := \
         1.0 - (_next_hydration_toggle_time - OS.get_ticks_msec()) / _latest_interval
-    var hydration_progress := \
-        1.0 - interval_progress if \
+    return 1.0 - interval_progress if \
         is_hydrated else \
         interval_progress
-    $BillboardHealthBar.set_progress(hydration_progress)
 
 
 func on_player_ready() -> void:
@@ -128,10 +130,7 @@ func set_is_hydrated(value: bool) -> void:
     $Particles.emitting = is_hydrated and !is_rooted
     $Dynamic/Bubbles.emitting = is_hydrated
     
-    var progress_bar_color := \
-        HYDRATED_COLOR if \
-        is_hydrated else \
-        DEHYDRATED_COLOR
+    var progress_bar_color := get_progress_bar_color()
     $BillboardHealthBar.set_full_color(progress_bar_color)
     $BillboardHealthBar.set_empty_color(progress_bar_color)
     
@@ -193,6 +192,8 @@ func set_is_hydrated(value: bool) -> void:
 func set_is_rooted(value) -> void:
     is_rooted = value
     $Particles.emitting = is_hydrated and !is_rooted
+    $BillboardHealthBar.visible = !is_rooted
+    Screen.get_hud().set_is_pool_hydration_shown(is_rooted)
 
 
 func _interpolate_hydration(progress: float) -> void:
@@ -220,6 +221,12 @@ func consume_water(amount: float) -> void:
     if water_level <= 0.0 and DOES_CONSUMING_WATER_DRAIN_POOL:
         set_is_hydrated(false)
         Session.pools_drained += 1
+
+
+func get_progress_bar_color() -> Color:
+    return HYDRATED_COLOR if \
+        is_hydrated else \
+        DEHYDRATED_COLOR
 
 
 func _on_Area_body_entered(body):

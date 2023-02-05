@@ -342,6 +342,9 @@ func set_is_near_pool(is_near_pool: bool, value: Pool) -> void:
 func get_is_near_hydrated_pool() -> bool:
     return is_instance_valid(pool) and pool.is_hydrated
 
+func get_is_rooted_near_pool() -> bool:
+    return is_instance_valid(pool) and is_rooted
+
 func on_is_near_hydrated_pool_changed() -> void:
     # TODO: Update UI?
     pass

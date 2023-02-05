@@ -41,7 +41,9 @@ func _ready():
 
 func set_health(value):
     health = clamp(value, 0, max_health)
-    $BillboardHealthBar.set_progress(health / max_health)
+    var progress: float = health / max_health
+    $BillboardHealthBar.set_progress(progress)
+    $BillboardHealthBar.visible = progress < 1.0
     if health == 0:
         die()
 

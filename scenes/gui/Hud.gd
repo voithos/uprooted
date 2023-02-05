@@ -41,6 +41,21 @@ func reset() -> void:
     update_waves()
 
 
+func _process(delta: float) -> void:
+    if !is_instance_valid(Session.player):
+        return
+    
+    if Session.player.get_is_rooted_near_pool():
+        var color := Session.player.pool.get_progress_bar_color()
+        var hydration_progress := get_node("%HydrationProgress")
+        var hydration_background := get_node("%HydrationBackground")
+        hydration_progress.color = color
+        
+        hydration_progress.rect_min_size.x = \
+            Session.player.pool.get_hydration_progress() * \
+            hydration_background.rect_size.x
+
+
 func update_score() -> void:
     get_node("%Score").text = \
         str(Session.score) if \
@@ -136,6 +151,14 @@ func set_is_shown(value: bool, fades := true) -> void:
         fade_tween.start()
     else:
         self.modulate.a = end
+
+
+func set_is_pool_hydration_shown(value: bool) -> void:
+    get_node("%HydrationBar").visible = value
+    get_node("%HydrationBarSpacer").visible = value
+    if value:
+        var color := Session.player.pool.get_progress_bar_color()
+        get_node("%HydrationProgress").color = color
 
 
 func _fade_tween_completed(object: Object, key: NodePath) -> void:

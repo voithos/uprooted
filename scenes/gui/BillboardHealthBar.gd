@@ -17,9 +17,9 @@ func _ready() -> void:
     mesh.material = mesh.material.duplicate()
     material = mesh.material
     
-    material.set_shader_param("albedo_to", full_color)
-    material.set_shader_param("albedo_from", empty_color)
-    material.set_shader_param("albedo_bg", background_color)
+    material.set_shader_param("albedoTo", full_color)
+    material.set_shader_param("albedoFrom", empty_color)
+    material.set_shader_param("albedoBG", background_color)
 
 
 func set_progress(progress: float) -> void:
@@ -28,14 +28,14 @@ func set_progress(progress: float) -> void:
 
 func set_full_color(value: Color) -> void:
     full_color = value
-    material.set_shader_param("albedo_to", full_color)
+    material.set_shader_param("albedoTo", full_color)
 
 
 func set_empty_color(value: Color) -> void:
     empty_color = value
-    material.set_shader_param("albedo_from", empty_color)
+    material.set_shader_param("albedoFrom", empty_color)
 
 
 func set_background_color(value: Color) -> void:
     background_color = value
-    material.set_shader_param("albedo_bg", background_color)
+    material.set_shader_param("albedoBG", background_color)

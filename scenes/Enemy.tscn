@@ -89,6 +89,7 @@ transform = Transform( 1, 0, 0, 0, 1, -1.06581e-14, 0, 1.06581e-14, 1, 0, 0.9993
 shape = SubResource( 3 )
 
 [node name="BillboardHealthBar" parent="." instance=ExtResource( 4 )]
+visible = false
 mesh = SubResource( 10 )
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
