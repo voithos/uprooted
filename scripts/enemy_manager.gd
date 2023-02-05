@@ -124,9 +124,9 @@ func _spawn_enemy(enemy_scene: PackedScene) -> void:
     spawn_position.y = _find_safe_spawn_height()
     
     var enemy: Enemy = enemy_scene.instance()
+    Session.level.add_child(enemy)
     enemy.global_translation = spawn_position
     enemies[enemy] = true
-    Session.level.add_child(enemy)
 
 
 func _find_safe_spawn_height() -> float:

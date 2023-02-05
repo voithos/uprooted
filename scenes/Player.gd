@@ -44,6 +44,11 @@ var is_airborne := false
 var was_airborne := false
 var is_fast_falling := false
 
+onready var gun_initial_translation = $CameraLag/gun.translation
+onready var gun_initial_rot_z = $CameraLag/gun.rotation_degrees.z
+var GUN_SHEATHED_TRANSLATION
+const GUN_SHEATHED_ROT_Z := deg2rad(-90.0)
+
 const MAX_HEALTH = 6.0
 var health = MAX_HEALTH
 signal health_changed
@@ -69,6 +74,13 @@ func _ready():
     collision_extents.z = $CollisionShape.shape.radius
     
     previous_position = global_translation
+    
+    GUN_SHEATHED_TRANSLATION = gun_initial_translation
+    GUN_SHEATHED_TRANSLATION.y += -0.1
+    GUN_SHEATHED_TRANSLATION.z += 0.5
+    
+    $CameraLag/gun.translation = GUN_SHEATHED_TRANSLATION
+    $CameraLag/gun.rotation.z = GUN_SHEATHED_ROT_Z
 
 func _physics_process(delta: float) -> void:
     process_movement(delta)
@@ -103,6 +115,8 @@ func _begin_rooting():
     is_rooting = true
     rooting_tween = get_tree().create_tween()
     rooting_tween.tween_property($Head, "translation:y", 0.0, ROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+    rooting_tween.parallel().tween_property($CameraLag/gun, "translation", gun_initial_translation, ROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+    rooting_tween.parallel().tween_property($CameraLag/gun, "rotation:z", gun_initial_rot_z, ROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
     yield(rooting_tween, "finished")
     is_rooted = true
     is_rooting = false
@@ -125,6 +139,8 @@ func _begin_unrooting():
     is_rooting = false
     var tween = get_tree().create_tween()
     tween.tween_property($Head, "translation:y", original_head_y, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+    tween.parallel().tween_property($CameraLag/gun, "translation", GUN_SHEATHED_TRANSLATION, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+    tween.parallel().tween_property($CameraLag/gun, "rotation:z", GUN_SHEATHED_ROT_Z, duration).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
     yield(tween, "finished")
     
     is_unrooting = false
