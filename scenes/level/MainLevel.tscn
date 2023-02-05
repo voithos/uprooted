@@ -85,4 +85,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 74.233, 16.7543, -103.48 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -103.389, 5.64323, -21.6444 )
 
 [node name="GrassMultiMesh" parent="." instance=ExtResource( 9 )]
-extents = Vector2( 10, 10 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0 )
+extents = Vector2( 30, 30 )
+spawn_outside_circle = true
+radius = 0.0
+snap_to_terrain = true

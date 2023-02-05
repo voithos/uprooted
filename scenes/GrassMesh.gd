@@ -5,6 +5,7 @@ export var extents := Vector2.ONE
 export var spawn_outside_circle := false
 export var radius := 12.0
 export var character_path := NodePath()
+export var snap_to_terrain := false
 
 var _character: Spatial
 
@@ -13,11 +14,13 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
+    call_deferred("_setup_multimesh")
+    
+func _setup_multimesh() -> void:
     if character_path:
         _character = get_node(character_path)
     var rng := RandomNumberGenerator.new()
     rng.randomize()
-
     var theta := 0
     var increase := 1
     var center: Vector3 = get_parent().global_transform.origin
@@ -35,13 +38,22 @@ func _ready() -> void:
             z = rng.randf_range(-extents.y, extents.y)
             
         transform.origin = Vector3(x, 0, z)
+        
+        # Only snap in-game because autoloads aren't available in editor.
+        if snap_to_terrain and !Engine.editor_hint:
+            var from := global_translation + transform.origin
+            from.y = 1000.0
+            var terrain: Terrain = Session.level.terrain
+            var heightmap_cell_position: Vector3 = terrain.world_to_map(from)
+            var height: float = terrain._data.get_height_at(heightmap_cell_position.x, heightmap_cell_position.z)    
+            transform.origin.y = height - global_transform.origin.y
 
         multimesh.set_instance_transform(instance_index, transform)
 
 
 func _on_WindGrass_visibility_changed() -> void:
     if visible:
-        _ready()
+        call_deferred("_setup_multimesh")
 
 
 func _process(_delta: float) -> void:
