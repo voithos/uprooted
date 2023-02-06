@@ -116,7 +116,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Global Game Jam 2023"
+config/name="Uprooted"
 run/main_scene="res://scenes/Main.tscn"
 config/icon="res://icon.png"
 
