@@ -15,12 +15,14 @@ enum {
     BUBBLE,
     ROOTING,
     UNROOTING,
+    TAKE_DAMAGE,
 }
 
 const SAMPLES = {
     EXAMPLE: preload("res://assets/sfx/example.wav"),
     ROOTING: preload("res://assets/sfx/roots.ogg"),
     UNROOTING: preload("res://assets/sfx/unroot.ogg"),
+    TAKE_DAMAGE: preload("res://assets/sfx/take_damage.wav"),
 }
 
 const SAMPLESETS = {

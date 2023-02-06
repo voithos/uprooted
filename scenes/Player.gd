@@ -287,7 +287,8 @@ func _take_damage(damage):
         return
     set_health(health - damage)
     _begin_invulernability_after_damage()
-    Session.camera.add_trauma(0.8)
+    Session.camera.add_trauma(1.0)
+    Sfx.play(Sfx.TAKE_DAMAGE, -4)
 
 func _begin_invulernability_after_damage():
     is_invulnerable = true
