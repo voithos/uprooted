@@ -267,6 +267,9 @@ func _update_camera_lag(delta: float):
 func process_firing(delta: float):
     # TODO: make this auto-fire
     if !_can_fire():
+        # Check for misfire
+        if Input.is_action_just_pressed("fire") and is_rooted:
+            Sfx.play(Sfx.MISFIRE, Sfx.EXTRA_QUIET_DB)
         return
 
     if Input.is_action_just_pressed("fire"):

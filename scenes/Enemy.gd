@@ -53,6 +53,7 @@ var shoot_timeout := min_shoot_delay
 export var type := SMALL
 
 var bullet_scene = preload("res://scenes/EnemyBullet.tscn")
+var explosion_scene = preload("res://scenes/Explosion.tscn")
 
 func _ready():
     travel_speed = \
@@ -75,6 +76,12 @@ func take_damage():
 
 func die():
     Session.add_score(SCORES[type])
+    var explosion = explosion_scene.instance()
+    var scene_root = get_tree().root.get_children()[0]
+    scene_root.add_child(explosion)
+
+    explosion.global_transform = global_transform
+    explosion.emit_and_die()
     queue_free()
 
 func set_up_timer() -> void:

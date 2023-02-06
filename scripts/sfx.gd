@@ -4,7 +4,7 @@ extends Node
 
 const SFX_DB = -8.0
 const QUIET_DB = -12.0
-const EXTRA_QUIET_DB = -20.0
+const EXTRA_QUIET_DB = -15.0
 const EVEN_QUIETER_DB = -25.0
 const BACKGROUND_QUIET_DB = -40.0
 
@@ -16,6 +16,7 @@ enum {
     ROOTING,
     UNROOTING,
     TAKE_DAMAGE,
+    MISFIRE,
 }
 
 const SAMPLES = {
@@ -23,12 +24,12 @@ const SAMPLES = {
     ROOTING: preload("res://assets/sfx/roots.ogg"),
     UNROOTING: preload("res://assets/sfx/unroot.ogg"),
     TAKE_DAMAGE: preload("res://assets/sfx/take_damage.wav"),
+    MISFIRE: preload("res://assets/sfx/pop2.ogg"),
 }
 
 const SAMPLESETS = {
     BUBBLE: [
         preload("res://assets/sfx/pop1.ogg"),
-        preload("res://assets/sfx/pop2.ogg"),
         preload("res://assets/sfx/pop6.ogg"),
         preload("res://assets/sfx/pop8.ogg"),
         preload("res://assets/sfx/pop10.ogg"),

@@ -1,0 +1,109 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://scenes/ExplosionShader.tres" type="Shader" id=1]
+[ext_resource path="res://assets/vfx/blue_edit.png" type="Texture" id=2]
+[ext_resource path="res://assets/vfx/red_edit.png" type="Texture" id=3]
+[ext_resource path="res://assets/vfx/green_edit.png" type="Texture" id=4]
+[ext_resource path="res://scenes/Explosion.gd" type="Script" id=5]
+
+[sub_resource type="OpenSimplexNoise" id=4]
+
+[sub_resource type="NoiseTexture" id=5]
+seamless = true
+noise = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/fire_color = Color( 1, 0.305882, 0, 1 )
+shader_param/fire_strength = 10.0
+shader_param/warble_strength = 0.2
+shader_param/time_scale = 0.2
+shader_param/alpha_scissor = 0.23
+shader_param/red_texture = ExtResource( 3 )
+shader_param/green_texture = ExtResource( 4 )
+shader_param/blue_texture = ExtResource( 2 )
+shader_param/noise_texture = SubResource( 5 )
+
+[sub_resource type="Gradient" id=8]
+offsets = PoolRealArray( 0, 0.347015, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1, 1, 1, 0.529412, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=9]
+gradient = SubResource( 8 )
+
+[sub_resource type="Curve" id=6]
+max_value = 20.0
+_data = [ Vector2( 0, 9 ), 0.0, -5.33537, 0, 0, Vector2( 0.226804, 8.18182 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=7]
+curve = SubResource( 6 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector3( 0, 0, 1 )
+gravity = Vector3( 0, 3, 0 )
+radial_accel_random = 0.47
+radial_accel_curve = SubResource( 7 )
+angle = 720.0
+angle_random = 1.0
+scale = 3.0
+color_ramp = SubResource( 9 )
+
+[sub_resource type="QuadMesh" id=3]
+
+[sub_resource type="Curve" id=13]
+min_value = -200.0
+max_value = 200.0
+_data = [ Vector2( 0, 53.6364 ), 0.0, 0.0, 0, 0, Vector2( 0.563574, 9.09091 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=14]
+curve = SubResource( 13 )
+
+[sub_resource type="Curve" id=15]
+_data = [ Vector2( 0, 0.665909 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
+
+[sub_resource type="ParticlesMaterial" id=10]
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3( 0, 4, 0 )
+radial_accel_random = 0.5
+radial_accel_curve = SubResource( 14 )
+scale = 0.1
+scale_random = 0.4
+scale_curve = SubResource( 16 )
+
+[sub_resource type="SpatialMaterial" id=11]
+albedo_color = Color( 0.988235, 0.439216, 0, 1 )
+emission_enabled = true
+emission = Color( 0.937255, 0.0784314, 0.0784314, 1 )
+emission_energy = 1.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[sub_resource type="SphereMesh" id=12]
+material = SubResource( 11 )
+
+[node name="Particles" type="Particles"]
+material_override = SubResource( 1 )
+emitting = false
+amount = 64
+lifetime = 0.75
+one_shot = true
+explosiveness = 1.0
+visibility_aabb = AABB( -4.84935, -3.61326, -5.12003, 9.52447, 10.2407, 10.0563 )
+process_material = SubResource( 2 )
+draw_pass_1 = SubResource( 3 )
+script = ExtResource( 5 )
+
+[node name="Embers" type="Particles" parent="."]
+emitting = false
+amount = 16
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 10 )
+draw_pass_1 = SubResource( 12 )
