@@ -28,6 +28,7 @@ func _physics_process(delta: float) -> void:
 func explode():
     if is_exploding:
         return
+    $AudioStreamPlayer3D.play()
     
     is_exploding = true
     $fireball_vfx.hide()

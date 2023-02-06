@@ -90,7 +90,8 @@ mesh = SubResource( 10 )
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17905, -1.11198 )
 stream = ExtResource( 5 )
-unit_db = -1.0
+unit_db = -2.0
+unit_size = 2.0
 autoplay = true
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]

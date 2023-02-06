@@ -32,7 +32,7 @@ var previous_position := Vector3.INF
 var previous_ground_position := Vector3.INF
 
 const ROOT_DURATION := 0.8
-const UNROOT_DURATION := 0.4
+const UNROOT_DURATION := 0.2
 var rooting_tween: SceneTreeTween
 
 # Ye olde terrible boolean state machine
