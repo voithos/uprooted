@@ -1,6 +1,6 @@
 extends KinematicBody
 
-const BULLET_SPEED = 10
+const BULLET_SPEED = 15
 var LIFETIME = 5.0
 
 var age = 0.0

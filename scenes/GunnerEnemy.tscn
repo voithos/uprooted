@@ -46,10 +46,10 @@ shader_param/progress = 0.0
 material = SubResource( 9 )
 size = Vector2( 1.6, 0.2 )
 
-[node name="Enemy" type="KinematicBody"]
+[node name="GunnerEnemy" type="KinematicBody"]
 collision_layer = 9
 script = ExtResource( 1 )
-TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED = 0.5
+TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED = 0.6
 max_health = 5.0
 can_shoot = true
 type = 2

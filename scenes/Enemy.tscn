@@ -54,6 +54,7 @@ size = Vector2( 1.6, 0.2 )
 [node name="Enemy" type="KinematicBody"]
 collision_layer = 9
 script = ExtResource( 1 )
+TRAVEL_SPEED_RATIO_OF_PLAYER_SPEED = 0.8
 
 [node name="lowpoly_mechatank" parent="." instance=ExtResource( 3 )]
 transform = Transform( -0.004, 0, -3.49691e-10, 0, 0.004, 0, 3.49691e-10, 0, -0.004, 0, 0, 0 )

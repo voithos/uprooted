@@ -6,6 +6,7 @@ export var spawn_outside_circle := false
 export var radius := 12.0
 export var character_path := NodePath()
 export var snap_to_terrain := false
+export var num_blades := 4096
 
 var _character: Spatial
 
@@ -19,6 +20,7 @@ func _ready() -> void:
 func _setup_multimesh() -> void:
     if character_path:
         _character = get_node(character_path)
+    multimesh.instance_count = num_blades
     var rng := RandomNumberGenerator.new()
     rng.randomize()
     var theta := 0
