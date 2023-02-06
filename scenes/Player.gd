@@ -132,6 +132,7 @@ func _begin_rooting():
 
 func _begin_unrooting():
     is_unrooting = true
+    Sfx.play(Sfx.UNROOTING, Sfx.QUIET_DB)
     # Immediately disengage
     is_rooted = false
     if is_instance_valid(pool):
