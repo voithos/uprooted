@@ -116,6 +116,7 @@ func _can_root():
 
 func _begin_rooting():
     is_rooting = true
+    Sfx.play(Sfx.ROOTING, Sfx.QUIET_DB)
     rooting_tween = get_tree().create_tween()
     rooting_tween.tween_property($Head, "translation:y", 0.0, ROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
     rooting_tween.parallel().tween_property($CameraLag/gun, "translation", gun_initial_translation, ROOT_DURATION).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

@@ -11,3 +11,4 @@
 - stream sfx acquired from https://opengameart.org/content/stream-sounds
 - machine sounds acquired from https://opengameart.org/content/30-cc0-sfx-loops
 - fire sound from https://opengameart.org/content/spell-4-fire
+- tree growth sound from https://opengameart.org/content/growth-spell

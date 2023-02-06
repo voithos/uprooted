@@ -13,10 +13,12 @@ const BACKGROUND_QUIET_DB = -40.0
 enum {
     EXAMPLE,
     BUBBLE,
+    ROOTING,
 }
 
 const SAMPLES = {
     EXAMPLE: preload("res://assets/sfx/example.wav"),
+    ROOTING: preload("res://assets/sfx/roots.ogg"),
 }
 
 const SAMPLESETS = {
