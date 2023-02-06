@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/ExplosionShader.tres" type="Shader" id=1]
 [ext_resource path="res://assets/vfx/blue_edit.png" type="Texture" id=2]
 [ext_resource path="res://assets/vfx/red_edit.png" type="Texture" id=3]
 [ext_resource path="res://assets/vfx/green_edit.png" type="Texture" id=4]
 [ext_resource path="res://scenes/Explosion.gd" type="Script" id=5]
+[ext_resource path="res://assets/sfx/explosion.wav" type="AudioStream" id=6]
 
 [sub_resource type="OpenSimplexNoise" id=4]
 
@@ -87,7 +88,7 @@ emission_on_uv2 = false
 [sub_resource type="SphereMesh" id=12]
 material = SubResource( 11 )
 
-[node name="Particles" type="Particles"]
+[node name="Explosion" type="Particles"]
 material_override = SubResource( 1 )
 emitting = false
 amount = 64
@@ -107,3 +108,7 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 10 )
 draw_pass_1 = SubResource( 12 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 6 )
+unit_size = 2.0

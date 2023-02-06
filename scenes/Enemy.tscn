@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/chainsaw.glb" type="PackedScene" id=2]
 [ext_resource path="res://assets/enemies/lowpoly_mechatank.glb" type="PackedScene" id=3]
 [ext_resource path="res://scenes/gui/BillboardHealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/sfx/machine_10.ogg" type="AudioStream" id=5]
-[ext_resource path="res://scenes/Explosion.tscn" type="PackedScene" id=6]
 
 [sub_resource type="BoxShape" id=5]
 extents = Vector3( 0.269899, 0.392506, 0.168192 )
@@ -94,7 +93,5 @@ stream = ExtResource( 5 )
 unit_db = -2.0
 unit_size = 2.0
 autoplay = true
-
-[node name="Particles" parent="." instance=ExtResource( 6 )]
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]

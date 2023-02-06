@@ -9,6 +9,7 @@ func _physics_process(delta):
 func emit():
     emitting = true
     $Embers.emitting = true
+    $AudioStreamPlayer3D.play()
 
 func emit_and_die():
     emit()
