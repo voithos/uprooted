@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/enemies/wk5a.glb" type="PackedScene" id=2]
+[ext_resource path="res://assets/sfx/machine_01.ogg" type="AudioStream" id=3]
 [ext_resource path="res://scenes/gui/BillboardHealthBar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape" id=4]
@@ -76,5 +77,12 @@ mesh = SubResource( 10 )
 
 [node name="BulletSpawner" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.96378, 2.31011, -1.6999 )
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.17905, -1.11198 )
+stream = ExtResource( 3 )
+unit_db = -2.0
+unit_size = 2.0
+autoplay = true
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_Hurtbox_body_entered"]
