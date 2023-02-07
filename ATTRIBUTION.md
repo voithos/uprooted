@@ -13,3 +13,4 @@
 - fire sound from https://opengameart.org/content/spell-4-fire
 - tree growth sound from https://opengameart.org/content/growth-spell
 - explosion from https://opengameart.org/content/bombexplosion8bit
+- fire sfx from https://opengameart.org/content/fire-loop

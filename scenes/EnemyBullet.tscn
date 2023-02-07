@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/EnemyBullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/vfx/fireball_vfx.glb" type="PackedScene" id=2]
 [ext_resource path="res://scenes/M_EnemyBullet.tres" type="Material" id=3]
 [ext_resource path="res://assets/sfx/foom_0.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sfx/fire.ogg" type="AudioStream" id=5]
 
 [sub_resource type="SphereShape" id=3]
 radius = 0.488074
@@ -89,3 +90,9 @@ anims/spin = SubResource( 9 )
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource( 4 )
+
+[node name="AudioStreamPlayer3DConstant" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 5 )
+unit_db = -3.5
+unit_size = 1.5
+autoplay = true
