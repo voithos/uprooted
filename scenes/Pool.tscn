@@ -114,7 +114,7 @@ gradient = SubResource( 20 )
 [sub_resource type="NoiseTexture" id=23]
 noise = SubResource( 22 )
 
-[sub_resource type="ShaderMaterial" id=29]
+[sub_resource type="ShaderMaterial" id=26]
 shader = SubResource( 17 )
 shader_param/flow_speed = 0.3
 shader_param/vignette_size = 0.25
@@ -129,7 +129,7 @@ shader_param/color_gradient = SubResource( 21 )
 shader_param/distort_noise = SubResource( 23 )
 
 [sub_resource type="PlaneMesh" id=1]
-material = SubResource( 29 )
+material = SubResource( 26 )
 size = Vector2( 1.95, 1.95 )
 
 [sub_resource type="SpatialMaterial" id=6]
@@ -236,6 +236,8 @@ size = Vector2( 1.6, 0.2 )
 
 [node name="Pool" type="Spatial"]
 script = ExtResource( 1 )
+min_rehydration_delay = 10.0
+max_rehydration_delay = 30.0
 
 [node name="Area" type="Area" parent="."]
 collision_layer = 32

@@ -7,8 +7,8 @@ const DOES_CONSUMING_WATER_DRAIN_POOL := false
 const DOES_POOL_HYDRATION_TOGGLE_ON_DELAY := true
 
 const DEFAULT_MAX_WATER_LEVEL := 27.0
-const DEFAULT_MIN_REHYDRATION_DELAY := 10.0
-const DEFAULT_MAX_REHYDRATION_DELAY := 30.0
+const DEFAULT_MIN_REHYDRATION_DELAY := 5.0
+const DEFAULT_MAX_REHYDRATION_DELAY := 15.0
 const DEFAULT_MIN_DEHYDRATION_DELAY := 20.0
 const DEFAULT_MAX_DEHYDRATION_DELAY := 40.0
 
@@ -130,14 +130,14 @@ func set_is_hydrated(
         Session.level.pool_manager.dehydrated_pools.erase(self)
         Session.level.pool_manager.hydrated_pools[self] = true
         hydration_delay = \
-            rand_range(min_dehydration_delay, max_dehydration_delay)
+            rand_range(DEFAULT_MIN_DEHYDRATION_DELAY, DEFAULT_MAX_DEHYDRATION_DELAY)
     else:
         last_dehydration_time = OS.get_ticks_msec()
         water_level = 0.0
         Session.level.pool_manager.dehydrated_pools[self] = true
         Session.level.pool_manager.hydrated_pools.erase(self)
         hydration_delay = \
-            rand_range(min_rehydration_delay, max_rehydration_delay)
+            rand_range(DEFAULT_MIN_REHYDRATION_DELAY, DEFAULT_MAX_REHYDRATION_DELAY)
     
     hydration_delay *= delay_ratio
     
