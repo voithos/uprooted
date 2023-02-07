@@ -44,6 +44,8 @@ var is_airborne := false
 var was_airborne := false
 var is_fast_falling := false
 var is_alive := true
+const AUTOFIRE_RATE = 0.16 # Seconds between bullets
+var autofire_timeout := AUTOFIRE_RATE
 
 onready var gun_initial_translation = $CameraLag/gun.translation
 onready var gun_initial_rot_z = $CameraLag/gun.rotation_degrees.z
@@ -125,6 +127,7 @@ func _begin_rooting():
     is_rooted = true
     is_rooting = false
     rooting_tween = null
+    autofire_timeout = AUTOFIRE_RATE
     if is_instance_valid(pool):
         pool.set_is_rooted(true)
     else:
@@ -265,14 +268,16 @@ func _update_camera_lag(delta: float):
     $CameraLag.global_transform.basis = Basis(vert_rot)
 
 func process_firing(delta: float):
-    # TODO: make this auto-fire
     if !_can_fire():
         # Check for misfire
         if Input.is_action_just_pressed("fire") and is_rooted:
             Sfx.play(Sfx.MISFIRE, Sfx.EXTRA_QUIET_DB)
         return
+        
+    autofire_timeout -= delta
 
-    if Input.is_action_just_pressed("fire"):
+    if Input.is_action_just_pressed("fire") or (Input.is_action_pressed("fire") and autofire_timeout < 0):
+        autofire_timeout = AUTOFIRE_RATE
         bullet_spawner.spawn_bullet()
         if is_instance_valid(pool):
             pool.consume_water(Pool.SMALL_SHOT_WATER_AMOUNT)
