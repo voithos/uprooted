@@ -76,6 +76,7 @@ func take_damage():
 
 func die():
     Session.add_score(SCORES[type])
+    Session.level.enemy_manager.on_enemy_destroyed(self)
     var explosion = explosion_scene.instance()
     var scene_root = get_tree().root.get_children()[0]
     scene_root.add_child(explosion)

@@ -11,14 +11,14 @@ const ENEMY_SCENES := {
 
 # TODO: Revent before submitting!
 #const WAVE_PERIOD := 20.0
-const WAVE_PERIOD := 10.0
+const WAVE_PERIOD := 20.0
 
 const STARTING_WAVE_INDEX_FOR_DEBUGGING := 0
 
 # TODO: Test all of this manual and automatic wave-curve configuration.
 
 const EXPLICIT_WAVE_CONFIGS := [
-    { small = 1, medium = 4, large = 0 },
+    { small = 1, medium = 0, large = 0 },
     { small = 3, medium = 0, large = 0 },
     { small = 3, medium = 1, large = 0 },
     { small = 3, medium = 0, large = 0 },
@@ -72,6 +72,7 @@ var spawn_positions := []
 var spawn_position_offset_distances := []
 
 var enemies := {}
+var enemies_alive := 0
 
 var timer: Timer
 
@@ -174,6 +175,7 @@ func _spawn_enemy(enemy_type: int) -> void:
     Session.level.add_child(enemy)
     enemy.global_translation = spawn_position
     enemies[enemy] = true
+    enemies_alive += 1
 
 
 func _find_safe_spawn_height(
@@ -192,3 +194,8 @@ func on_enemy_destroyed(enemy: Enemy) -> void:
     enemies.erase(enemy)
     enemy.queue_free()
     Session.enemies_destroyed += 1
+    enemies_alive -= 1
+    if enemies_alive <= 0:
+        # Reset the timer
+        timer.start()
+        _spawn_next_wave()
