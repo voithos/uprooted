@@ -29,6 +29,7 @@ func explode():
     if is_exploding:
         return
     $AudioStreamPlayer3D.play()
+    $AudioStreamPlayer3DConstant.stop()
     
     is_exploding = true
     $fireball_vfx.hide()
